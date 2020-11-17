@@ -14,13 +14,27 @@
 
         <script defer src="js/main.js" defer type='module'></script>
 
-        <!--Adding Scrollify if we want to use it-->
+        <!--Adding Scrollify if we want to use it
+        <script src="../../script/jquery-1.11.1.js"></script>
         <script src="js/jquery.scrollify.js"></script>
+        <script>
+            
+            $(function () {
+                $(".page").css({
+                height: $(window).height()
+                });
+                $.scrollify({
+                section: "section",
+                scrollbars: true
+                });
+            });
 
+        </script>
+        -->
     </head>
 
     <body>
-        <section id='intro'>
+        <section class='intro'>
             <div id='header'>
                 <h1>
                     Visualizations Final Project
@@ -31,7 +45,7 @@
                 Introduction to our project!
             </h3>
         </section>
-        <section id='overview'>
+        <section class='overview'>
             <div class='row'>
                 <div class='column column-10'>
 
@@ -51,7 +65,7 @@
                 </div>
             </div>
         </section>
-        <section id='poverty'>
+        <section class='poverty'>
             <div class='row'>
                 <div class='column column-10'>
 
@@ -71,7 +85,7 @@
                 </div>
             </div>
         </section>
-        <section id='state-by-state'>
+        <section class='state-by-state'>
             <div class='row'>
                 <div class='column column-10'>
 
@@ -91,7 +105,7 @@
                 </div>
             </div>
         </section>
-        <section id='unemployment'>
+        <section class='unemployment'>
             <div class='row'>
                 <div class='column column-10'>
 
