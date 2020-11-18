@@ -133,9 +133,9 @@ function Introduction(container){
                     .style('position', 'fixed')
                     .style('left', position[0]+10+'px')
                     .style('top', position[1]-600+'px')
-                    .style('background-color','purple')
+                    .style('background-color','#99ccff')
                     .style('border-radius','10px')
-                    .html('State: '+nodes.name +'<br>'+'Number of Food Insecure Individuals: '+nodes.avgFInum+'<br>'+'Avg Food Insecurity Rate: '+nodes.avgFIrate)
+                    .html('<b>State: '+nodes.name +'<br>'+'Number of Food Insecure Individuals: '+nodes.avgFInum+'<br>'+'Avg Food Insecurity Rate: '+nodes.avgFIrate+'</b>')
             })
             .on("mouseleave", (event, nodes) => {
                 d3.select('.tooltip')
