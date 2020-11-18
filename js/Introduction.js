@@ -23,6 +23,15 @@ function Introduction(container){
         
         const color = d3.scaleQuantize([1, 9], d3.schemeBlues[8])
             .domain(d3.extent(fiAvg, d=>d.avgFIrate))
+
+        const long = d3.scaleLinear()
+            .domain(d3.extent(fiAvg,d=>d.longitude))
+            .range([0,width])
+
+        const lat=d3.scaleLinear()
+            .domain(d3.extent(fiAvg,d=>d.latitude))
+            .range([height, 0])
+        
         const projection = d3.geoAlbersUsa().fitSize([width, height], states);
         const path = d3.geoPath().projection(projection);
 
@@ -96,8 +105,8 @@ function Introduction(container){
         
         stateForce.on("tick", function(){
             nodeElements
-                .attr("cx", node=>node.x)
-                .attr("cy", node=>node.y)
+                .attr("cx", node=>long(node.longitude))
+                .attr("cy", node=>lat(node.latitude))
         })
     })
 }
