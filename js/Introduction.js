@@ -1,6 +1,6 @@
 //WILL
 
-
+let visType
 
 function Introduction(container){
 
@@ -79,7 +79,7 @@ function Introduction(container){
             .style('font-style','italic')
             .attr('font-size',40)
 
-            console.log(fiAvg)
+           
         const svg2 = d3.select('.chart')
             .append('svg')
             .attr('width', width)  
