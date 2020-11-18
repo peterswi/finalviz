@@ -30,15 +30,17 @@ function Introduction(container){
         const states=data[1]
         const fooData=data[0]
         const fiAvg=data[2]
+        const avg=new Map(fiAvg.map(d=>[d.state,d.avgFI]))
+        console.log(avg)
         console.log(fiAvg)
         console.log(states)
         
             const width=600
             const height=600
             const half=width/2
-       
+        
         const color = d3.scaleQuantize([1, 7], d3.schemeBlues[6])
-            .domain(d3.extent(fooData, d=>d.FoodInsecurityRate))
+            .domain(d3.extent(fiAvg, d=>d.avgFI))
         const projection = d3.geoAlbersUsa().fitSize([width, height], states);
         const path = d3.geoPath().projection(projection);
 
@@ -60,7 +62,18 @@ function Introduction(container){
             .join("path")
             .attr("d", path)
             .attr("class", "state")
-            .style("fill", 'grey')
+            .style("fill", function(d){
+                const val=avg.get(d.properties.STUSPS)
+                
+                if (val){
+                    return color(val)
+                }
+                else {
+                    return '#ccc'
+                }
+                
+                
+            })
             //.attr("fill", d => colorScale(d => +d.count.split(",").join("")))
             .attr("fill-opacity", 1)
             .attr("stroke", "black");
