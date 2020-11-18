@@ -81,10 +81,10 @@ function Introduction(container){
 
         const circleScale=d3.scaleLinear()
             .domain(d3.extent(fiAvg,d=>d.avgFInum))
-            .range([8,30])
+            .range([8,50])
         
         const stateForce = d3.forceSimulation(fiAvg)
-            .force('charge', d3.forceManyBody().strength(-40))
+            .force('charge', d3.forceManyBody().strength(-4))
             .force('center', d3.forceCenter().x(half).y(half))
         
         const nodeElements=svg2.selectAll('circle')
@@ -96,8 +96,8 @@ function Introduction(container){
         
         stateForce.on("tick", function(){
             nodeElements
-                .attr("cx", 300)
-                .attr("cy", 100)
+                .attr("cx", node=>node.x)
+                .attr("cy", node=>node.y)
         })
     })
 }
