@@ -21,25 +21,31 @@ function Introduction(container){
 */
 
     Promise.all([ // load multiple files
-        d3.json('data/states-10m.json'),
+        
         d3.csv('data/MMG_Master.csv',d3.autoType),
-        d3.json('data/usState.json')
+        d3.json('data/usState.json'),
+        d3.csv('data/MMG_Avg.csv',d3.autoType)
     ]).then(data=>{ 
         
-        const us=data[0]
-        const states=data[2]
-        const fooData=data[1]
-        
+        const states=data[1]
+        const fooData=data[0]
+        const fiAvg=data[2]
+        console.log(fiAvg)
         console.log(states)
         
             const width=600
             const height=600
             const half=width/2
        
-        
+        const color = d3.scaleQuantize([1, 7], d3.schemeBlues[6])
+            .domain(d3.extent(fooData, d=>d.FoodInsecurityRate))
         const projection = d3.geoAlbersUsa().fitSize([width, height], states);
         const path = d3.geoPath().projection(projection);
 
+        var legend = d3.legendColor()
+            .scale(color)
+            .labelFormat(d3.format('.2f'))
+            .title("Insecurity Rate")
         
         const svg = d3.select(container)
             .append('svg')
@@ -58,10 +64,13 @@ function Introduction(container){
             //.attr("fill", d => colorScale(d => +d.count.split(",").join("")))
             .attr("fill-opacity", 1)
             .attr("stroke", "black");
-
+        
+            svg.append("g")
+            .attr("transform", "translate(500,10)")
+            .call(legend)
 
 /*
-        const color = d3.scaleQuantize([1, 10], d3.schemeBlues[9])
+        
         
         let mapGeo=topojson.feature(us, us.objects.states)
         //const projection=d3.geoMercator().fitExtent([[0,0],[width, height]],mapGeo)
