@@ -71,12 +71,12 @@ function Introduction(container){
             .call(legend)
             
         svg.append('text')
-            .attr('class','graphTitle')
-            .attr('x',half)
+            .attr('class','mapTitle')
+            .attr('x',half+20)
             .attr('y',100)
-            .text("US Food Insecurity")
+            .text("Relative Food Insecurity")
             .style('text-anchor','middle')
-            .style('font-style','italic')
+            .style('font-style','Bold')
             .attr('font-size',40)
 
            
@@ -100,7 +100,8 @@ function Introduction(container){
             .data(fiAvg)
             .enter().append('circle')
                 .attr('r', d=> circleScale(d.avgFInum))
-                .attr('fill', d=>color(d.avgFIrate))
+                .attr('fill','#0066ff')//d=>color(d.avgFIrate) COULD FILL BY RELATIVE FOOD INSECURITY RATE
+                .style('stroke','white')
        /*
         nodeElements.append("title")
             .text(function(d){
@@ -132,7 +133,7 @@ function Introduction(container){
                     .style('display', 'inline-block')
                     .style('position', 'fixed')
                     .style('left', position[0]+10+'px')
-                    .style('top', position[1]-600+'px')
+                    .style('top', position[1]+10+'px')
                     .style('background-color','#99ccff')
                     .style('border-radius','10px')
                     .html('<b>State: '+nodes.name +'<br>'+'Number of Food Insecure Individuals: '+nodes.avgFInum+'<br>'+'Avg Food Insecurity Rate: '+nodes.avgFIrate+'</b>')
@@ -141,7 +142,14 @@ function Introduction(container){
                 d3.select('.tooltip')
                     .style('display', 'none')
             })
-                
+        svg2.append('text')
+            .attr('class','graphTitle')
+            .attr('x',half+80)
+            .attr('y',100)
+            .text("Absolute Food Insecurity")
+            .style('text-anchor','middle')
+            .style('font-style','Bold')
+            .attr('font-size',40)
     })
 }
 export default Introduction
