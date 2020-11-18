@@ -30,24 +30,22 @@ function Introduction(container){
         const states=data[1]
         const fooData=data[0]
         const fiAvg=data[2]
-        const avg=new Map(fiAvg.map(d=>[d.state,d.avgFI]))
-        console.log(avg)
-        console.log(fiAvg)
-        console.log(states)
+        const avg=new Map(fiAvg.map(d=>[d.state,d.avgFIrate]))
+       
         
             const width=600
             const height=600
             const half=width/2
         
-        const color = d3.scaleQuantize([1, 7], d3.schemeBlues[6])
-            .domain(d3.extent(fiAvg, d=>d.avgFI))
+        const color = d3.scaleQuantize([1, 8], d3.schemeBlues[7])
+            .domain(d3.extent(fiAvg, d=>d.avgFIrate))
         const projection = d3.geoAlbersUsa().fitSize([width, height], states);
         const path = d3.geoPath().projection(projection);
 
         var legend = d3.legendColor()
             .scale(color)
-            .labelFormat(d3.format('.2f'))
-            .title("Insecurity Rate")
+            .labelFormat(d3.format('.3f'))
+            .title("Food Insecurity Rate")
         
         const svg = d3.select(container)
             .append('svg')
@@ -71,56 +69,15 @@ function Introduction(container){
                 else {
                     return '#ccc'
                 }
-                
-                
             })
-            //.attr("fill", d => colorScale(d => +d.count.split(",").join("")))
             .attr("fill-opacity", 1)
             .attr("stroke", "black");
         
-            svg.append("g")
-            .attr("transform", "translate(500,10)")
+        svg.append("g")
+            .attr("transform", "translate(460,-10)")
             .call(legend)
 
-/*
-        
-        
-        let mapGeo=topojson.feature(us, us.objects.states)
-        //const projection=d3.geoMercator().fitExtent([[0,0],[width, height]],mapGeo)
-        let usPath=d3.geoPath()//.projection(projection)
-
-        const svg = d3.select(container)
-            .append('svg')
-            .attr('width', width)  
-            .attr('height',height)
-            .attr('viewBox', [0,0,width, height])
-            .append('g')
-            .attr('transform', `translate(${width/16}, ${height/16})`)
-        //    .append(() => legend({color, title: '', width: 260}));
-
-        const map = svg.append("path")
-            .datum(mapGeo)
-            .attr("d", usPath)
-            .style('fill','darkgrey')
-            .style("opacity", 1)
-
-        svg.append("g")
-            .selectAll("path")
-            .data(mapGeo)
-            .join("path")
-            .attr("fill", 'blue')
-            .attr("d", usPath)
-            .append("title")
-            //.text(d => `${d.properties.name}, ${states.get(d.id.slice(0, 2)).name} ${format(data.get(d.id))}`)
-
-
-         svg.append("path")
-            .datum(topojson.mesh(us, us.objects.states, (a, b) => a !== b))
-            .attr("fill", "none")
-            .attr("stroke", "white")
-            .attr("stroke-linejoin", "round")
-            .attr("d", usPath);
-*/
+       
     })
 }
 export default Introduction
