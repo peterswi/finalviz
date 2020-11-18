@@ -90,24 +90,58 @@ function Introduction(container){
 
         const circleScale=d3.scaleLinear()
             .domain(d3.extent(fiAvg,d=>d.avgFInum))
-            .range([8,50])
+            .range([10,50])
         
         const stateForce = d3.forceSimulation(fiAvg)
-            .force('charge', d3.forceManyBody().strength(-4))
+            .force('charge', d3.forceManyBody().strength(-5))
             .force('center', d3.forceCenter().x(half).y(half))
         
         const nodeElements=svg2.selectAll('circle')
             .data(fiAvg)
             .enter().append('circle')
-                .attr('r', d=> circleScale(d.avgFInum)
-                    )
+                .attr('r', d=> circleScale(d.avgFInum))
                 .attr('fill', d=>color(d.avgFIrate))
+       /*
+        nodeElements.append("title")
+            .text(function(d){
+                return 'State: '+d.name +'<br>'+'Number of Food Insecure Individuals'
+            })
         
+        const textElements=svg2.selectAll('text')
+            .data(fiAvg)
+            .enter().append('text')
+                .text(d=>d.state)
+                .attr('font-size',12)
+            */
         stateForce.on("tick", function(){
             nodeElements
                 .attr("cx", node=>long(node.longitude))
                 .attr("cy", node=>lat(node.latitude))
+            /*
+            textElements
+                .attr("dx", node=>long(node.longitude)-8)
+                .attr("dy", node=>lat(node.latitude)+5)
+                */
         })
+        let tool = d3.selectAll('circle')
+            .on("mouseenter", (event, nodes) => {
+                const position = d3.pointer(event, window)
+                
+                d3.select('.tooltip')
+                    .attr('class','tooltip')
+                    .style('display', 'inline-block')
+                    .style('position', 'fixed')
+                    .style('left', position[0]+10+'px')
+                    .style('top', position[1]-600+'px')
+                    .style('background-color','purple')
+                    .style('border-radius','10px')
+                    .html('State: '+nodes.name +'<br>'+'Number of Food Insecure Individuals: '+nodes.avgFInum+'<br>'+'Avg Food Insecurity Rate: '+nodes.avgFIrate)
+            })
+            .on("mouseleave", (event, nodes) => {
+                d3.select('.tooltip')
+                    .style('display', 'none')
+            })
+                
     })
 }
 export default Introduction
