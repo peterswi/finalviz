@@ -1,4 +1,4 @@
-﻿StateName,startFI,endFI,diff
+﻿state,start,end,diff
 AL,0.18,0.17,-0.01
 AK,0.14,0.13,-0.01
 AR,0.18,0.13,-0.05
