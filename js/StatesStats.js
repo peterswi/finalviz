@@ -7,9 +7,13 @@ const width = 800 - margin.left - margin.right
 const height = 600 - margin.top - margin.bottom
 
 function StateStats(container){
-    d3.csv('data/MMG_Avg.csv').then(data => {
+    d3.csv('data/MMG_Master.csv').then(data => {
         console.log(data)
-        let states = data.state;
+        let states = data.StateName;
+
+        for (let i = 0; i < states.length; i++) {
+            
+        }
 
         let svg = d3.selectAll(container).append('svg')
             .attr("width", width + margin.left + margin.right)
