@@ -15,8 +15,7 @@ function Introduction(container){
         const fooData=data[0]
         const fiAvg=data[2]
         const avg=new Map(fiAvg.map(d=>[d.state,d.avgFIrate]))
-       
-        
+
             const width=600
             const height=600
             const half=width/2
@@ -80,7 +79,7 @@ function Introduction(container){
             .attr('font-size',40)
 
            
-        const svg2 = d3.select('.chart')
+        const svg2 = d3.select('.chart1')
             .append('svg')
             .attr('width', width)  
             .attr('height',height)
@@ -102,27 +101,14 @@ function Introduction(container){
                 .attr('r', d=> circleScale(d.avgFInum))
                 .attr('fill','#0066ff')//d=>color(d.avgFIrate) COULD FILL BY RELATIVE FOOD INSECURITY RATE
                 .style('stroke','white')
-       /*
-        nodeElements.append("title")
-            .text(function(d){
-                return 'State: '+d.name +'<br>'+'Number of Food Insecure Individuals'
-            })
-        
-        const textElements=svg2.selectAll('text')
-            .data(fiAvg)
-            .enter().append('text')
-                .text(d=>d.state)
-                .attr('font-size',12)
-            */
+       
+         .attr('font-size',12)
+            
         stateForce.on("tick", function(){
-            nodeElements
-                .attr("cx", node=>long(node.longitude))
-                .attr("cy", node=>lat(node.latitude))
-            /*
-            textElements
-                .attr("dx", node=>long(node.longitude)-8)
-                .attr("dy", node=>lat(node.latitude)+5)
-                */
+            nodeElements    //temporarily making this junmp into a circle instead of symbol map for the sake of potentially doing absolute comparison
+                .attr("cx", node=>node.x)//long(node.longitude))
+                .attr("cy", node=>node.y) //lat(node.latitude))
+            
         })
         let tool = d3.selectAll('circle')
             .on("mouseenter", (event, nodes) => {
@@ -150,6 +136,28 @@ function Introduction(container){
             .style('text-anchor','middle')
             .style('font-style','Bold')
             .attr('font-size',40)
+
+            
+            //INITIAL ATTEMPT AT STARTING TO MAKE THINGS A RELATIVE COMPARISON
+
+        let totals=fiAvg.map(fiAvg=>fiAvg.avgFInum)
+        const totFI=totals.reduce((a,b)=>a+b)
+
+        const svg3 = d3.select('.chart2')
+            .append('svg')
+            .attr('width', width)  
+            .attr('height',height)
+            .attr('viewBox', [0,0,width+150, height+150])
+            .append('g')
+            .attr('transform', `translate(${width/16}, ${height/16})`)
+       //
+        svg3.selectAll('circ')
+                .attr('r', function(totFI){
+                    console.log(totFI)
+                    return circleScale(totFi)} )
+                .attr('fill','#0066ff')//d=>color(d.avgFIrate) COULD FILL BY RELATIVE FOOD INSECURITY RATE
+                .style('stroke','white')
+            
     })
 }
 export default Introduction
