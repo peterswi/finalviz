@@ -1,4 +1,3 @@
-
 //KATHRYN
 
 Promise.all([ // load multiple files
