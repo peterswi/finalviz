@@ -63,24 +63,25 @@ function StateStats(container){
                 else return d3.schemeSet1[2];
             })
 
-            let tool = d3.selectAll('line')
-            .on("mouseenter", (event, data) => {
-                const position = d3.pointer(event, window)
-                
-                d3.select('.state-tooltip')
-                    .attr('class','tooltip')
-                    .style('display', 'inline-block')
-                    .style('position', 'fixed')
-                    .style('left', position[0]+10+'px')
-                    .style('top', position[1]+10+'px')
-                    .style('background-color','#99ccff')
-                    .style('border-radius','10px')
-                    .html('<b>State: '+ data.state  +'<br>'+'FI Rate in 2009: '+ data.start +'<br>'+'FI Rate in 2018: '+ data.end+'</b>')
-            })
-            .on("mouseleave", (event, nodes) => {
-                d3.select('.tooltip')
-                    .style('display', 'none')
-            })
+            let tool = d3.selectAll('g')
+                .on("mouseenter", (event, data) => {
+                    const position = d3.pointer(event, window)
+                    console.log(position)
+                    console.log(data)
+                    d3.select('.state-tooltip')
+                        .attr('class','state-tooltip')
+                        .style('display', 'inline-block')
+                        .style('position', 'fixed')
+                        .style('left', position[0]+10+'px')
+                        .style('top', position[1]+10+'px')
+                        .style('background-color','#99ccff')
+                        .style('border-radius','10px')
+                        .html('<b>State: '+ data.state  +'<br>'+'FI Rate in 2009: '+ data.start +'<br>'+'FI Rate in 2018: '+ data.end+'</b>')
+                })
+                .on("mouseleave", (event, data) => {
+                    d3.select('.state-tooltip')
+                        .style('display', 'none')
+                })
 
     })
 
