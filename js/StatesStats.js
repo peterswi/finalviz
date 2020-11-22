@@ -67,7 +67,7 @@ function StateStats(container){
             .on("mouseenter", (event, data) => {
                 const position = d3.pointer(event, window)
                 
-                d3.select('.tooltip')
+                d3.select('.state-tooltip')
                     .attr('class','tooltip')
                     .style('display', 'inline-block')
                     .style('position', 'fixed')

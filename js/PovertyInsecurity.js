@@ -1,5 +1,7 @@
 //KATHRYN
 
+function PovertyInsecurity(container) {
+
 Promise.all([ // load multiple files
         
         d3.json("https://raw.githubusercontent.com/peterswi/finalviz/main/data/usState.json"),
@@ -125,3 +127,7 @@ Promise.all([ // load multiple files
             .attr('font-size',30)
 
     })
+
+}
+
+export default PovertyInsecurity
