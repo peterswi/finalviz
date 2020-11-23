@@ -1,6 +1,6 @@
 //KATHRYN
 
-function PovertyInsecurity(container) {
+function PovertyInsecurity(container1, container2) {
 
 Promise.all([ // load multiple files
         
@@ -45,7 +45,7 @@ Promise.all([ // load multiple files
             .title("Child Food Insecurity Rate")
 
   //Create Poverty Map
-        const svg = d3.select(".chart1")
+        const svg = d3.select(container1)
             .append('svg')
             .attr('width', width)  
             .attr('height',height)
@@ -86,7 +86,7 @@ Promise.all([ // load multiple files
   
   
   //Create Food Insecurity Map
-      const svg2 = d3.select('.chart2')
+      const svg2 = d3.select(container2)
             .append('svg')
             .attr('width', width)  
             .attr('height',height)
