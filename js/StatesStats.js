@@ -57,30 +57,51 @@ function StateStats(container){
             .attr("x1", d => xScale(d.state))
             .attr("y2", d => yScale(d.end))
             .attr("x2", d => xScale(d.state)) 
+            .attr('class', 'line')
             .attr("stroke-width", 10)
             .attr("stroke", d => {
                 if (d.start < d.end) return d3.schemeSet1[0];
                 else return d3.schemeSet1[2];
             })
 
-            let tool = d3.selectAll('line')
+        /*    let tool = d3.selectAll('line')
                 .on("mouseenter", (event, d) => {
                     const position = d3.pointer(event, window)
                     console.log(position)
                     console.log(d)
                     d3.select('.state-tooltip')
-                 //       .attr('class','state-tooltip')
+                        .attr('class','state-tooltip')
                         .style('display', 'inline-block')
                         .style('position', 'fixed')
                         .style('left', position[0]+10+'px')
                         .style('top', position[1]+10+'px')
-                        .style('background-color','#99ccff')
+                        .style('background-color','gray')
                         .style('border-radius','10px')
                         .html('<b>State: '+ d.state  +'<br>'+'FI Rate in 2009: '+ d.start +'<br>'+'FI Rate in 2018: '+ d.end+'</b>')
                 })
                 .on("mouseleave", (event, data) => {
                     d3.select('.state-tooltip')
                         .style('display', 'none')
+                }) */
+
+            let tip = d3.selectAll('line')
+                .on("mouseenter", (event, d) => {
+                    // show tooltip
+                  //  let country = d;
+                    const pos = d3.pointer(event, window); 
+                    console.log(pos)
+                    console.log(d)
+                    d3.select('.state-tooltip')
+                        .style('display', 'inline-block')
+                        .style('position', 'Fixed')
+                        .style('left', pos[0]+5+'px')
+                        .style('top', pos[1]+5+'px')
+                        .html('<b>State: '+ d.state  +'<br>'+'FI Rate in 2009: '+ d.start +'<br>'+'FI Rate in 2018: '+ d.end+'</b>');
+                        })
+                .on("mouseleave", (event, d) => {
+                    // hide tooltip
+                    d3.select('.tooltip')
+                        .style('display', 'none');
                 })
 
     })
