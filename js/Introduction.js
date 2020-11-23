@@ -39,6 +39,8 @@ function Introduction(container1, container2, container3){
             .labelFormat(d3.format('.3f'))
             .title("Food Insecurity Rate")
         
+        //MAP
+
         const svg = d3.select(container1)
             .append('svg')
             .attr('width', width)  
@@ -79,6 +81,9 @@ function Introduction(container1, container2, container3){
             .attr('font-size',40)
 
            
+        // FORCE DIAGRAM-- next step is to add DRAG feature, allow for comparison
+        // should we add a 'total' to the force diagram?
+
         const svg2 = d3.select(container2)
             .append('svg')
             .attr('width', width)  
@@ -138,7 +143,13 @@ function Introduction(container1, container2, container3){
             .attr('font-size',40)
 
             
-            //INITIAL ATTEMPT AT STARTING TO MAKE THINGS A RELATIVE COMPARISON
+        //INITIAL ATTEMPT AT STARTING TO MAKE THINGS A RELATIVE COMPARISON
+        //want to build out another diagram of circles for comparison
+        //make a new csv witht 'total' comparisons
+        
+        //Comparisons: totalFI=46,425,378   pop of Canada=37,590,000 
+        //pop of spain= 46,940,000   num of meals we eat in a lifetime=89,790 (estimate)
+
 
         let totals=fiAvg.map(fiAvg=>fiAvg.avgFInum)
         const totFI=totals.reduce((a,b)=>a+b)
