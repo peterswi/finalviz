@@ -107,15 +107,15 @@ function Introduction(container1, container2, container3){
             .data(fiAvg)
             .enter().append('circle')
                 .attr('r', d=> circleScale(d.avgFInum))
-                .attr('fill','#0066ff')//d=>color(d.avgFIrate) COULD FILL BY RELATIVE FOOD INSECURITY RATE
+                .attr('fill','#0066ff')
                 .style('stroke','white')
        
          .attr('font-size',12)
             
         stateForce.on("tick", function(){
-            nodeElements    //temporarily making this junmp into a circle instead of symbol map for the sake of potentially doing absolute comparison
-                .attr("cx", node=>node.x)//long(node.longitude))
-                .attr("cy", node=>node.y) //lat(node.latitude))
+            nodeElements    
+                .attr("cx", node=>node.x)
+                .attr("cy", node=>node.y) 
             
         })
         let tool = d3.selectAll('circle')
@@ -138,21 +138,15 @@ function Introduction(container1, container2, container3){
             })
         svg2.append('text')
             .attr('class','graphTitle')
-            .attr('x',half+80)
-            .attr('y',100)
+            .attr('x',half)
+            .attr('y',75)
             .text("Absolute Food Insecurity")
             .style('text-anchor','middle')
             .style('font-style','Bold')
             .attr('font-size',40)
 
             
-        //INITIAL ATTEMPT AT STARTING TO MAKE THINGS A RELATIVE COMPARISON
-        //want to build out another diagram of circles for comparison
-        //make a new csv witht 'total' comparisons
-
-        //Comparisons: totalFI=46,425,378   pop of Canada=37,590,000 
-        //pop of spain= 46,940,000   num of meals we eat in a lifetime=89,790 (estimate)
-
+        //Should we get a tooltip going here to show the values behind these numbers?
 
         console.log(compare)
         const circleScale2=d3.scaleLinear()
@@ -160,9 +154,9 @@ function Introduction(container1, container2, container3){
             .range([10,150])
         const svg3 = d3.select(container3)
             .append('svg')
-            .attr('width', 2.5*width)  
+            .attr('width', 2.6*width)  
             .attr('height',height)
-            .attr('viewBox', [0,0,width+150, height+150])
+            .attr('viewBox', [0,0,2.6*width+150, height+150])
             .append('g')
             .attr('transform', `translate(${width/16}, ${height/16})`)
        //
@@ -171,11 +165,91 @@ function Introduction(container1, container2, container3){
             .enter().append('circle')
             .attr('r', function(d){
                 return circleScale2(d.total)} )
-            .attr('fill','#0066ff')//d=>color(d.avgFIrate) COULD FILL BY RELATIVE FOOD INSECURITY RATE
-            .attr('cx', function(d, i) { return i * 275 + 50; })
-            .attr('cy',height/2)
+            .attr('fill',function(d){
+                if(d.compare=='canadaPop'){
+                    return 'red'
+                }
+                else if(d.compare=='spainPop'){
+                    return 'gold'
+                }
+                else if(d.compare=='totFI'){
+                    return '#0066ff'
+                }
+                else{
+                    return 'green'
+                }
+            })
+            .attr('cx', function(d, i) { return i * 200 + 100; })
+            .attr('cy', function(d){
+                if (d.compare=='totFI'){
+                    return 160
+                }
+                else if(d.compare=='canadaPop'){
+                    return 460
+                }
+                else if (d.compare=='spainPop'){
+                    return 160
+                }
+                else if(d.compare=='lifeMeals'){
+                    return 460
+                }
+                else {
+                    return 160
+                }
+            })
             .style('stroke','white')
             
+        svg3.selectAll('text')
+            .data(compare)
+            .enter().append('text')
+            .text(function(d){
+                if (d.compare=='totFI'){
+                    return "Avg Total Yearly Food Insecurity "
+                }
+                else if(d.compare=='canadaPop'){
+                    return 'Population of Canada'
+                }
+                else if (d.compare=='spainPop'){
+                    return 'Population of Spain'
+                }
+                else if(d.compare=='lifeMeals'){
+                    return "One individual's lifetime meals"
+                }
+                else {
+                    return "500 people's meals for a lifetime"
+                }
+            })
+            .attr('x',function(d, i) { return i *200 + 95 ; })
+            .attr('y', function(d){
+                if (d.compare=='totFI'){
+                    return 335
+                }
+                else if(d.compare=='canadaPop'){
+                    return 610
+                }
+                else if (d.compare=='spainPop'){
+                    return 335
+                }
+                else if(d.compare=='lifeMeals'){
+                    return 495
+                }
+                else {
+                    return 335
+                }
+            })
+            .style('font-size',30)
+            .style('text-anchor','middle')
+            .style('font-style','Bold')
+
+        svg3.append('text')
+            .attr('class','relativeTitle')
+            .attr('x',495)
+            .attr('y',-5)
+            .text("Compare to the following ...")
+            .style('text-anchor','middle')
+            .style('font-style','Bold')
+            .attr('font-size',40)
+
     })
 }
 export default Introduction
