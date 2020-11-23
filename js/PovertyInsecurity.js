@@ -4,8 +4,8 @@ function PovertyInsecurity(container1, container2) {
 
 Promise.all([ // load multiple files
         
-        d3.json("https://raw.githubusercontent.com/peterswi/finalviz/main/data/usState.json"),
-        d3.csv("https://raw.githubusercontent.com/peterswi/finalviz/main/data/MMG_Avg.csv",d3.autoType)
+        d3.json("data/usState.json"),
+        d3.csv("data/MMG_Avg.csv",d3.autoType)
     ]).then(data=>{ 
         
         const states=data[0]
