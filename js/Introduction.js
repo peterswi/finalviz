@@ -8,12 +8,15 @@ function Introduction(container1, container2, container3){
         
         d3.csv('data/MMG_Master.csv',d3.autoType),
         d3.json('data/usState.json'),
-        d3.csv('data/MMG_Avg.csv',d3.autoType)
+        d3.csv('data/MMG_Avg.csv',d3.autoType), 
+        d3.csv('data/comparisons.csv',d3.autoType)
     ]).then(data=>{ 
         
         const states=data[1]
         const fooData=data[0]
         const fiAvg=data[2]
+        const compare=data[3]
+        
         const avg=new Map(fiAvg.map(d=>[d.state,d.avgFIrate]))
 
             const width=600
@@ -146,14 +149,12 @@ function Introduction(container1, container2, container3){
         //INITIAL ATTEMPT AT STARTING TO MAKE THINGS A RELATIVE COMPARISON
         //want to build out another diagram of circles for comparison
         //make a new csv witht 'total' comparisons
-        
+
         //Comparisons: totalFI=46,425,378   pop of Canada=37,590,000 
         //pop of spain= 46,940,000   num of meals we eat in a lifetime=89,790 (estimate)
 
 
-        let totals=fiAvg.map(fiAvg=>fiAvg.avgFInum)
-        const totFI=totals.reduce((a,b)=>a+b)
-        console.log(totFI)
+        console.log(compare)
         const svg3 = d3.select(container3)
             .append('svg')
             .attr('width', width)  
