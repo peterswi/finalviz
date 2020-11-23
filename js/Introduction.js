@@ -2,7 +2,7 @@
 
 let visType
 
-function Introduction(container){
+function Introduction(container1, container2, container3){
 
     Promise.all([ // load multiple files
         
@@ -39,7 +39,7 @@ function Introduction(container){
             .labelFormat(d3.format('.3f'))
             .title("Food Insecurity Rate")
         
-        const svg = d3.select(container)
+        const svg = d3.select(container1)
             .append('svg')
             .attr('width', width)  
             .attr('height',height)
@@ -47,7 +47,7 @@ function Introduction(container){
             .append('g')
             .attr('transform', `translate(${width/16}, ${height/16})`)
              
-        svg.selectAll(container)
+        svg.selectAll(container1)
             .data(states.features)
             .join("path")
             .attr("d", path)
@@ -79,7 +79,7 @@ function Introduction(container){
             .attr('font-size',40)
 
            
-        const svg2 = d3.select('.chart1')
+        const svg2 = d3.select(container2)
             .append('svg')
             .attr('width', width)  
             .attr('height',height)
@@ -142,8 +142,8 @@ function Introduction(container){
 
         let totals=fiAvg.map(fiAvg=>fiAvg.avgFInum)
         const totFI=totals.reduce((a,b)=>a+b)
-
-        const svg3 = d3.select('.chart2')
+        console.log(totFI)
+        const svg3 = d3.select(container3)
             .append('svg')
             .attr('width', width)  
             .attr('height',height)
