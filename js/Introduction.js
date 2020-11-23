@@ -163,12 +163,14 @@ function Introduction(container1, container2, container3){
             .append('g')
             .attr('transform', `translate(${width/16}, ${height/16})`)
        //
-        svg3.selectAll('circ')
-                .attr('r', function(totFI){
-                    console.log(totFI)
-                    return circleScale(totFi)} )
-                .attr('fill','#0066ff')//d=>color(d.avgFIrate) COULD FILL BY RELATIVE FOOD INSECURITY RATE
-                .style('stroke','white')
+        svg3.selectAll('circle')
+            .data(compare)
+            .enter().append('circle')
+            .attr('r', function(d){
+                console.log(d)
+                return circleScale(d.total)} )
+            .attr('fill','#0066ff')//d=>color(d.avgFIrate) COULD FILL BY RELATIVE FOOD INSECURITY RATE
+            .style('stroke','white')
             
     })
 }
