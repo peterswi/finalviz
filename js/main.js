@@ -9,6 +9,6 @@ d3.csv('data/MMG_Master.csv',d3.autoType).then(data=>{
     const intro=Introduction('.intro-map','.absolute-force','.relative')
     const map=PovertyInsecurity('.poverty-insecurity','.chart2')
     const stats=StateStats('.state-stat')
-    const unemp=InsecurityUnemployment('.unemployment')
+    const unemp=InsecurityUnemployment('.unemployment-charts')
 
 })
