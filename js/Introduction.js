@@ -155,9 +155,12 @@ function Introduction(container1, container2, container3){
 
 
         console.log(compare)
+        const circleScale2=d3.scaleLinear()
+            .domain(d3.extent(compare,d=>d.total))
+            .range([10,150])
         const svg3 = d3.select(container3)
             .append('svg')
-            .attr('width', width)  
+            .attr('width', 2.5*width)  
             .attr('height',height)
             .attr('viewBox', [0,0,width+150, height+150])
             .append('g')
@@ -167,9 +170,10 @@ function Introduction(container1, container2, container3){
             .data(compare)
             .enter().append('circle')
             .attr('r', function(d){
-                console.log(d)
-                return circleScale(d.total)} )
+                return circleScale2(d.total)} )
             .attr('fill','#0066ff')//d=>color(d.avgFIrate) COULD FILL BY RELATIVE FOOD INSECURITY RATE
+            .attr('cx', function(d, i) { return i * 275 + 50; })
+            .attr('cy',height/2)
             .style('stroke','white')
             
     })
