@@ -12,8 +12,8 @@ function InsecurityUnemployment(container){
             "height": 400,
             "mark": {"type": "area", "tooltip": true},
             "selection": {
-            "brush": {"type": "interval"}
-          },
+                "brush": {"type": "interval"}
+              },
             "encoding": {
               "x": {
                 "field": "year",
@@ -31,26 +31,29 @@ function InsecurityUnemployment(container){
           },
           {
             "data": {
-                "url": "data/unemployment/us_unemployment_data.csv"
+                "url": "data/MMG_Master.csv"
             },
               "width": 1120,
               "transform": [
-            {"filter": {"selection": "brush"}}
-          ],
-              "mark": "line",
+                {"filter": {"selection": "brush"}}
+              ],
+              "mark": "bar",
               "encoding": {
                 "x": {
-                  "field": "Year"
+                  "field": "year",
+                  "timeUnit": "year",
+                  "type": "ordinal"
                 },
               "y": {
-                "field": "Average",
+                "field": "unemp",
                 "type": "quantitative",
-                "title": "National Unemployment Rate"
-              }
+                "title": "National Unemployment Rate",
+                "scale": {"domain": [0, 10]}
+              },
             }
           }
         ]
         };
-        vegaEmbed(container, v1Spec);
+        vegaEmbed(container, v1Spec)
 }
 export default InsecurityUnemployment
