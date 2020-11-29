@@ -20,7 +20,7 @@ Promise.all([ // load multiple files
         
         const color = d3.scaleQuantize([1, 9], d3.schemeBlues[8])
             .domain(d3.extent(fiAvg, d=>d.avgChildPov))
-        const color2 = d3.scaleQuantize([1, 9], d3.schemeBlues[8])
+        const color2 = d3.scaleQuantize([1, 9], d3.schemeReds[8])
             .domain(d3.extent(fiAvg, d=>d.avgChildFIN))
 
         const long = d3.scaleLinear()
