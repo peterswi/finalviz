@@ -121,6 +121,7 @@ function Introduction(container1, container2, container3){
 
         let min=d3.min(fiAvg,d=>d.avgFInum)
         let max=d3.max(compare,d=>d.total)
+        
         const circleScale=d3.scaleLinear()
             .domain([min,max])
             .range([10,150])
