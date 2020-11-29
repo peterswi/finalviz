@@ -43,6 +43,13 @@ function StateStats(container){
         let yAxisGroup = svg.select(".y-axis").call(yAxis)
         let xAxisGroup = svg.select(".x-axis").call(xAxis)
 
+        svg.append('text')
+            .attr('class','ytitle')
+            .attr('x',80)
+            .attr('y', 0)
+            .text('Food Insecurity Rate')
+            .style('text-anchor', 'middle')
+            
 
         const g = svg.append("g")
             .attr("stroke-linecap", "round")
@@ -71,10 +78,13 @@ function StateStats(container){
                     console.log(pos)
                     console.log(d)
                     d3.select('.state-tooltip')
+                        .attr('class', 'state-tooltip')
                         .style('display', 'inline-block')
-                        .style('position', 'Fixed')
-                        .style('left', pos[0]+5+'px')
-                        .style('top', pos[1]+5+'px')
+                        .style('position', 'fixed')
+                        .style('left', 100+'px')
+                        .style('top', 100+'px')
+                        //.style('left', pos[0]+5+'px')
+                        //.style('top', pos[1]+5 +'px')
                         .html('<b>State: '+ d.state  +'<br>'+'FI Rate in 2009: '+ d.start +'<br>'+'FI Rate in 2018: '+ d.end+'</b>');
                         })
                 .on("mouseleave", (event, d) => {
