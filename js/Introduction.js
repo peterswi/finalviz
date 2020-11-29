@@ -1,21 +1,45 @@
 //WILL
 
-let visType
+let drag = stateForce => {
 
+    function dragstarted(event) {
+        if (!event.active) stateForce.alphaTarget(0.05).restart();
+        event.subject.fx = event.subject.x;
+        event.subject.fy = event.subject.y;
+      }
+      
+      function dragged(event) {
+        event.subject.fx = event.x;
+        event.subject.fy = event.y;
+      }
+      
+      function dragended(event) {
+        if (!event.active) stateForce.alphaTarget(0);
+        event.subject.fx = null;
+        event.subject.fy = null;
+      }
+      
+      return d3.drag()
+          .on("start", dragstarted)
+          .on("drag", dragged)
+          .on("end", dragended)
+         
+
+}
 function Introduction(container1, container2, container3){
+
+    
 
     Promise.all([ // load multiple files
         
-        d3.csv('data/MMG_Master.csv',d3.autoType),
         d3.json('data/usState.json'),
         d3.csv('data/MMG_Avg.csv',d3.autoType), 
         d3.csv('data/comparisons.csv',d3.autoType)
     ]).then(data=>{ 
         
-        const states=data[1]
-        const fooData=data[0]
-        const fiAvg=data[2]
-        const compare=data[3]
+        const states=data[0]
+        const fiAvg=data[1]
+        const compare=data[2]
         
         const avg=new Map(fiAvg.map(d=>[d.state,d.avgFIrate]))
 
@@ -95,9 +119,11 @@ function Introduction(container1, container2, container3){
             .append('g')
             .attr('transform', `translate(${width/16}, ${height/16})`)
 
+        let min=d3.min(fiAvg,d=>d.avgFInum)
+        let max=d3.max(compare,d=>d.total)
         const circleScale=d3.scaleLinear()
-            .domain(d3.extent(fiAvg,d=>d.avgFInum))
-            .range([10,50])
+            .domain([min,max])
+            .range([10,150])
         
         const stateForce = d3.forceSimulation(fiAvg)
             .force('charge', d3.forceManyBody().strength(-5))
@@ -109,6 +135,7 @@ function Introduction(container1, container2, container3){
                 .attr('r', d=> circleScale(d.avgFInum))
                 .attr('fill','#0066ff')
                 .style('stroke','white')
+                .call(drag(stateForce))
        
          .attr('font-size',12)
             
@@ -139,19 +166,24 @@ function Introduction(container1, container2, container3){
         svg2.append('text')
             .attr('class','graphTitle')
             .attr('x',half)
-            .attr('y',75)
-            .text("Absolute Food Insecurity")
+            .attr('y',50)
+            .text("Absolute Food Insecurity by State")
             .style('text-anchor','middle')
             .style('font-style','Bold')
             .attr('font-size',40)
 
-            
-        //Should we get a tooltip going here to show the values behind these numbers?
+        svg2.append('text')
+            .attr('class','graphSubtitle')
+            .attr('x',half)
+            .attr('y',height)
+            .text("Drag each state for comparisons on the right ...")
+            .style('text-anchor','middle')
+            .style('font-style','Italic')
+            .attr('font-size',26)
 
-        console.log(compare)
-        const circleScale2=d3.scaleLinear()
-            .domain(d3.extent(compare,d=>d.total))
-            .range([10,150])
+            
+        //Should we get a tooltip going here to show the values behind these numbers
+    
         const svg3 = d3.select(container3)
             .append('svg')
             .attr('width', 2.6*width)  
@@ -164,7 +196,7 @@ function Introduction(container1, container2, container3){
             .data(compare)
             .enter().append('circle')
             .attr('r', function(d){
-                return circleScale2(d.total)} )
+                return circleScale(d.total)} )
             .attr('fill',function(d){
                 if(d.compare=='canadaPop'){
                     return 'red'
