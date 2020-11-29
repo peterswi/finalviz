@@ -35,7 +35,7 @@ function StateStats(container){
 
         svg.append("g")
             .attr("class", "x-axis")
-            .attr("transform", `translate(0,1500)`)
+            .attr("transform", `translate(0, ${height})`)
 
         svg.append("g")
             .attr("class", "y-axis")
@@ -81,15 +81,16 @@ function StateStats(container){
                         .attr('class', 'state-tooltip')
                         .style('display', 'inline-block')
                         .style('position', 'fixed')
-                        .style('left', 100+'px')
-                        .style('top', 100+'px')
-                        //.style('left', pos[0]+5+'px')
-                        //.style('top', pos[1]+5 +'px')
-                        .html('<b>State: '+ d.state  +'<br>'+'FI Rate in 2009: '+ d.start +'<br>'+'FI Rate in 2018: '+ d.end+'</b>');
+                        .style('font-style', 'italic')
+                      //  .style('left', 100+'px')
+                      //  .style('top', 100+'px')
+                        .style('left', pos[0]+5+'px')
+                        .style('top', pos[1]+5 +'px')
+                        .html('<b>State: '+ d.state  +'<br>'+'FI Rate in 2009: '+ Math.round(d.start*100) + '%' +'<br>'+'FI Rate in 2018: '+ Math.round(100*d.end) + '%' + '</br>' + 'Percent Change:  ' + Math.round(100*(d.end - d.start),2) + '%');
                         })
                 .on("mouseleave", (event, d) => {
                     // hide tooltip
-                    d3.select('.tooltip')
+                    d3.select('.state-tooltip')
                         .style('display', 'none');
                 })
 
