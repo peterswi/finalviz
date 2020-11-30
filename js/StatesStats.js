@@ -2,9 +2,9 @@
 
 // Want to answer the question: where is food insecurity getitng worse? with a candlestick chart
 // HTML container = state-stat
-const margin = ({top: 15, right: 15, bottom: 50, left: 40})
-const width = 1400 - margin.left - margin.right
-const height = 700 - margin.top - margin.bottom
+
+const width = 1400 
+const height = 700 
 
 function StateStats(container){
     d3.csv('data/MMG_FIchange.csv').then(data => {
@@ -42,11 +42,11 @@ function StateStats(container){
 
         svg.append("g")
             .attr("class", "x-axis")
-            .attr("transform", 'translate(-10,630)')
+            .attr("transform", 'translate(0,700)')
 
         svg.append("g")
             .attr("class", "y-axis")
-            .attr("transform", 'translate(-10,0)')
+            .attr("transform", 'translate(0,0)')
 
         let yAxisGroup = svg.select(".y-axis").call(yAxis)
         let xAxisGroup = svg.select(".x-axis").call(xAxis)
@@ -82,7 +82,7 @@ function StateStats(container){
             let tip = d3.selectAll('line')
                 .on("mouseenter", (event, data) => {
                     // show tooltip
-                    const pos = d3.pointer(event)
+                    const pos = d3.pointer(event, window)
                    // let pos = d3.select(this).node().getBoundingClientRect();
                     console.log(pos)
                     console.log(data)
