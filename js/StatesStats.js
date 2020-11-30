@@ -16,14 +16,14 @@ function StateStats(container){
             .attr("width", width + margin.left + margin.right)
             .attr("height", height + margin.top + margin.bottom)
             .append("g")
-            .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
+            .attr('transform', `translate(${width/16}, ${height/16})`)
 
         let xScale = d3.scaleBand()
-            .domain(data.map(d => d.state))
-            .range([0,width]);
+            .domain(data.map(data => data.state))
+            .range([0,width])
         
         let yScale = d3.scaleLinear()
-            .domain([0.07, 0.20])
+            .domain([0.06, 0.21])
             .range([height, 0])
 
         let xAxis = d3.axisBottom()
@@ -50,21 +50,21 @@ function StateStats(container){
             .text('Food Insecurity Rate')
             .style('text-anchor', 'middle')
             
-
+        console.log(data)
         const g = svg.append("g")
             .attr("stroke-linecap", "round")
             .attr("stroke", "black")
             .selectAll("g")
             .data(data)
             .join("g")
-            .attr("transform", d => `translate(${xScale(d.state)},0)`)
+            .attr("transform", d => `translate(${xScale(data.state)})`)
 
         g.append("line")
             .attr("y1", d => yScale(d.start))
             .attr("x1", d => xScale(d.state))
             .attr("y2", d => yScale(d.end))
             .attr("x2", d => xScale(d.state)) 
-            .attr("stroke-width", 10)
+            .attr("stroke-width", 7)
             .attr("stroke", d => {
                 if (d.start < d.end) return d3.schemeSet1[0];
                 else return d3.schemeSet1[2];
@@ -74,7 +74,7 @@ function StateStats(container){
             let tip = d3.selectAll('line')
                 .on("mouseenter", (event, d) => {
                     // show tooltip
-                    const pos = d3.pointer(event, window); 
+                    const pos = d3.pointer(event, window)
                     console.log(pos)
                     console.log(d)
                     d3.select('.state-tooltip')
@@ -82,10 +82,10 @@ function StateStats(container){
                         .style('display', 'inline-block')
                         .style('position', 'fixed')
                         .style('font-style', 'italic')
-                      //  .style('left', 100+'px')
-                      //  .style('top', 100+'px')
-                        .style('left', pos[0]+5+'px')
-                        .style('top', pos[1]+5 +'px')
+                        .style('left', (pos[0]-width)+5+'px')
+                        .style('top', (pos[1]-height)+5+'px')
+                        .style('left', 300+'px')
+                        .style('top', 300 +'px')
                         .html('<b>State: '+ d.state  +'<br>'+'FI Rate in 2009: '+ Math.round(d.start*100) + '%' +'<br>'+'FI Rate in 2018: '+ Math.round(100*d.end) + '%' + '</br>' + 'Percent Change:  ' + Math.round(100*(d.end - d.start),2) + '%');
                         })
                 .on("mouseleave", (event, d) => {
