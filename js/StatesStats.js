@@ -88,12 +88,12 @@ function StateStats(container){
                     d3.select('.state-tooltip')
                         .attr('class', 'state-tooltip')
                         .style('display', 'inline-block')
-                        .style('position', 'fixed')
+                       // .style('position', 'fixed')
                         .style('font-style', 'italic')
-                        .style('left', pos[0]+5+'px')
-                        .style('top', pos[1]+5+'px')
-                      //  .style('left', 300+'px')
-                      //  .style('top', 300 +'px')
+                       // .style('left', pos[0]+'px')
+                       // .style('top', pos[1]+'px')
+                        .style('left', 100+'px')
+                        .style('top', -100 +'px')
                         .html('<b>State: '+ d.state  +'<br>'+'FI Rate in 2009: '+ Math.round(d.start*100) + '%' +'<br>'+'FI Rate in 2018: '+ Math.round(100*d.end) + '%' + '</br>' + 'Percent Change:  ' + Math.round(100*(d.end - d.start),2) + '%');
                         })
                 .on("mouseleave", (event, d) => {
