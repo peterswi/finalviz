@@ -113,7 +113,7 @@ function Introduction(container1, container2, container3){
 
         const svg2 = d3.select(container2)
             .append('svg')
-            .attr('width', width)  
+            .attr('width', 2.6*width)  
             .attr('height',height)
             .attr('viewBox', [0,0,2.6*width+150, height+150])
             .append('g')
@@ -126,74 +126,6 @@ function Introduction(container1, container2, container3){
             .domain([min,max])
             .range([10,150])
         
-        const stateForce = d3.forceSimulation(fiAvg)
-            .force('charge', d3.forceManyBody().strength(-5))
-            .force('center', d3.forceCenter().x(half).y(half))
-        
-        const nodeElements=svg2.selectAll('circle1')
-            .data(fiAvg)
-            .enter().append('circle')
-                .attr('class', 'circle1')
-                .attr('r', d=> circleScale(d.avgFInum))
-                .attr('fill','#0066ff')
-                .style('stroke','white')
-                .call(drag(stateForce))
-       
-         .attr('font-size',12)
-            
-        stateForce.on("tick", function(){
-            nodeElements    
-                .attr("cx", node=>node.x)
-                .attr("cy", node=>node.y) 
-            
-        })
-        let tool = d3.selectAll('circle1')
-            .on("mouseenter", (event, nodes) => {
-                const position = d3.pointer(event, window)
-                
-                d3.select('.tooltip')
-                    .attr('class','tooltip')
-                    .style('display', 'inline-block')
-                    .style('position', 'fixed')
-                    .style('left', position[0]+10+'px')
-                    .style('top', position[1]+10+'px')
-                    .style('background-color','#99ccff')
-                    .style('border-radius','10px')
-                    .html('<b>State: '+nodes.name +'<br>'+'Number of Food Insecure Individuals: '+nodes.avgFInum+'<br>'+'Avg Food Insecurity Rate: '+nodes.avgFIrate+'</b>')
-            })
-            .on("mouseleave", (event, nodes) => {
-                d3.select('.tooltip')
-                    .style('display', 'none')
-            })
-        svg2.append('text')
-            .attr('class','graphTitle')
-            .attr('x',250)
-            .attr('y',50)
-            .text("Absolute Food Insecurity by State")
-            .style('text-anchor','middle')
-            .style('font-style','Bold')
-            .attr('font-size',40)
-
-        svg2.append('text')
-            .attr('class','graphSubtitle')
-            .attr('x',half)
-            .attr('y',height)
-            .text("Drag each state for comparisons on the right ...")
-            .style('text-anchor','middle')
-            .style('font-style','Italic')
-            .attr('font-size',26)
-
-            
-        //Should we get a tooltip going here to show the values behind these numbers
-    /*
-        const svg3 = d3.select(container3)
-            .append('svg')
-            .attr('width', 2.6*width)  
-            .attr('height',height)
-            .attr('viewBox', [0,0,2.6*width+150, height+150])
-            .append('g')
-            .attr('transform', `translate(${width/16}, ${height/16})`)
-       */
         svg2.selectAll('circle2')
             .data(compare)
             .enter().append('circle')
@@ -214,7 +146,7 @@ function Introduction(container1, container2, container3){
                     return 'green'
                 }
             })
-            .attr('cx', function(d, i) { return i * 200 + 750; })
+            .attr('cx', function(d, i) { return i * 175+ 750; })
             .attr('cy', function(d){
                 if (d.compare=='totFI'){
                     return 160
@@ -254,7 +186,7 @@ function Introduction(container1, container2, container3){
                     return "500 people's meals for a lifetime"
                 }
             })
-            .attr('x',function(d, i) { return i *200 + 650 ; })
+            .attr('x',function(d, i) { return i *200 + 720 ; })
             .attr('y', function(d){
                 if (d.compare=='totFI'){
                     return 335
@@ -278,13 +210,78 @@ function Introduction(container1, container2, container3){
 
         svg2.append('text')
             .attr('class','relativeTitle')
-            .attr('x',495)
+            .attr('x',700)
             .attr('y',-5)
             .text("Compare to the following ...")
             .style('text-anchor','middle')
             .style('font-style','Bold')
             .attr('font-size',40)
 
+        
+        const stateForce = d3.forceSimulation(fiAvg)
+            .force('charge', d3.forceManyBody().strength(-5))
+            .force('center', d3.forceCenter().x(half).y(half))
+        
+        const nodeElements=svg2.selectAll('circle1')
+            .data(fiAvg)
+            .enter().append('circle')
+                .attr('class', 'circle1')
+                .attr('r', d=> circleScale(d.avgFInum))
+                .attr('fill','#0066ff')
+                .style('stroke','white')
+                .call(drag(stateForce))
+       
+         .attr('font-size',12)
+            
+        stateForce.on("tick", function(){
+            nodeElements    
+                .attr("cx", node=>node.x)
+                .attr("cy", node=>node.y) 
+            
+        })
+        
+        svg2.append('text')
+            .attr('class','graphTitle')
+            .attr('x',250)
+            .attr('y',50)
+            .text("Absolute Food Insecurity by State")
+            .style('text-anchor','middle')
+            .style('font-style','Bold')
+            .attr('font-size',40)
+
+        svg2.append('text')
+            .attr('class','graphSubtitle')
+            .attr('x',half)
+            .attr('y',height)
+            .text("Drag each state for comparisons on the right ...")
+            .style('text-anchor','middle')
+            .style('font-style','Italic')
+            .attr('font-size',26)
+
+            
+        //Should we get a tooltip going here to show the values behind these numbers
+   
+        
+
+        //adjust TOOLTIP TO WORK FOR the other circles
+        let tool = d3.selectAll('circle')
+        .on("mouseenter", (event, nodes) => {
+            const position = d3.pointer(event, window)
+            
+            d3.select('.tooltip')
+                .attr('class','tooltip')
+                .style('display', 'inline-block')
+                .style('position', 'fixed')
+                .style('left', position[0]+10+'px')
+                .style('top', position[1]-10+'px')
+                .style('background-color','#99ccff')
+                .style('border-radius','10px')
+                .html('<b>State: '+nodes.name +'<br>'+'Number of Food Insecure Individuals: '+nodes.avgFInum+'<br>'+'Avg Food Insecurity Rate: '+nodes.avgFIrate+'</b>')
+        })
+        .on("mouseleave", (event, nodes) => {
+            d3.select('.tooltip')
+                .style('display', 'none')
+        })
     })
 }
 export default Introduction
