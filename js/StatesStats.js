@@ -35,7 +35,7 @@ function StateStats(container){
 
         svg.append("g")
             .attr("class", "x-axis")
-            .attr("transform", `translate(0, ${height})`)
+            .attr("transform", `translate(1100,20)`)
 
         svg.append("g")
             .attr("class", "y-axis")
@@ -50,7 +50,7 @@ function StateStats(container){
             .text('Food Insecurity Rate')
             .style('text-anchor', 'middle')
             
-        console.log(data)
+
         const g = svg.append("g")
             .attr("stroke-linecap", "round")
             .attr("stroke", "black")
