@@ -115,7 +115,7 @@ function Introduction(container1, container2, container3){
             .append('svg')
             .attr('width', width)  
             .attr('height',height)
-            .attr('viewBox', [0,0,width+150, height+150])
+            .attr('viewBox', [0,0,2.6*width+150, height+150])
             .append('g')
             .attr('transform', `translate(${width/16}, ${height/16})`)
 
@@ -130,9 +130,10 @@ function Introduction(container1, container2, container3){
             .force('charge', d3.forceManyBody().strength(-5))
             .force('center', d3.forceCenter().x(half).y(half))
         
-        const nodeElements=svg2.selectAll('circle')
+        const nodeElements=svg2.selectAll('circle1')
             .data(fiAvg)
             .enter().append('circle')
+                .attr('class', 'circle1')
                 .attr('r', d=> circleScale(d.avgFInum))
                 .attr('fill','#0066ff')
                 .style('stroke','white')
@@ -146,7 +147,7 @@ function Introduction(container1, container2, container3){
                 .attr("cy", node=>node.y) 
             
         })
-        let tool = d3.selectAll('circle')
+        let tool = d3.selectAll('circle1')
             .on("mouseenter", (event, nodes) => {
                 const position = d3.pointer(event, window)
                 
@@ -166,7 +167,7 @@ function Introduction(container1, container2, container3){
             })
         svg2.append('text')
             .attr('class','graphTitle')
-            .attr('x',half)
+            .attr('x',250)
             .attr('y',50)
             .text("Absolute Food Insecurity by State")
             .style('text-anchor','middle')
@@ -184,7 +185,7 @@ function Introduction(container1, container2, container3){
 
             
         //Should we get a tooltip going here to show the values behind these numbers
-    
+    /*
         const svg3 = d3.select(container3)
             .append('svg')
             .attr('width', 2.6*width)  
@@ -192,10 +193,11 @@ function Introduction(container1, container2, container3){
             .attr('viewBox', [0,0,2.6*width+150, height+150])
             .append('g')
             .attr('transform', `translate(${width/16}, ${height/16})`)
-       //
-        svg3.selectAll('circle')
+       */
+        svg2.selectAll('circle2')
             .data(compare)
             .enter().append('circle')
+            .attr('class','circle2')
             .attr('r', function(d){
                 return circleScale(d.total)} )
             .attr('fill',function(d){
@@ -212,7 +214,7 @@ function Introduction(container1, container2, container3){
                     return 'green'
                 }
             })
-            .attr('cx', function(d, i) { return i * 200 + 100; })
+            .attr('cx', function(d, i) { return i * 200 + 750; })
             .attr('cy', function(d){
                 if (d.compare=='totFI'){
                     return 160
@@ -232,7 +234,7 @@ function Introduction(container1, container2, container3){
             })
             .style('stroke','white')
             
-        svg3.selectAll('text')
+        svg2.selectAll('text')
             .data(compare)
             .enter().append('text')
             .text(function(d){
@@ -252,7 +254,7 @@ function Introduction(container1, container2, container3){
                     return "500 people's meals for a lifetime"
                 }
             })
-            .attr('x',function(d, i) { return i *200 + 95 ; })
+            .attr('x',function(d, i) { return i *200 + 650 ; })
             .attr('y', function(d){
                 if (d.compare=='totFI'){
                     return 335
@@ -274,7 +276,7 @@ function Introduction(container1, container2, container3){
             .style('text-anchor','middle')
             .style('font-style','Bold')
 
-        svg3.append('text')
+        svg2.append('text')
             .attr('class','relativeTitle')
             .attr('x',495)
             .attr('y',-5)
