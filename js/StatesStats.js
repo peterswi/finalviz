@@ -3,7 +3,7 @@
 // Want to answer the question: where is food insecurity getitng worse? with a candlestick chart
 // HTML container = state-stat
 
-const width = 1400 
+const width = 1200 
 const height = 700 
 
 function StateStats(container){
@@ -42,11 +42,11 @@ function StateStats(container){
 
         svg.append("g")
             .attr("class", "x-axis")
-            .attr("transform", 'translate(0,700)')
+            .attr("transform", `translate(-12,${height})`)
 
         svg.append("g")
             .attr("class", "y-axis")
-            .attr("transform", 'translate(0,0)')
+            .attr("transform", 'translate(-12,0)')
 
         let yAxisGroup = svg.select(".y-axis").call(yAxis)
         let xAxisGroup = svg.select(".x-axis").call(xAxis)
