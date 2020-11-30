@@ -80,26 +80,24 @@ function StateStats(container){
 
 
             let tip = d3.selectAll('line')
-                .on("mouseenter", (event, d) => {
+                .on("mouseenter", (event, data) => {
                     // show tooltip
-                  //  const pos = d3.pointer(event, window)
-                  const posX = d3.event.pageX
-                  const posY = d3.event.pageY
+                    const pos = d3.pointer(event)
                    // let pos = d3.select(this).node().getBoundingClientRect();
                     console.log(pos)
-                    console.log(d)
+                    console.log(data)
                     d3.select('.state-tooltip')
                         .attr('class', 'state-tooltip')
                         .style('display', 'inline-block')
                         .style('position', 'absolute')
                         .style('font-style', 'italic')
-                       // .style('left', pos[0]+10+'px')
-                       // .style('top', pos[1]+'px')
-                        .style('left', posX+ "px")
-                        .style('top', posY +'px')
-                        .html('<b>State: '+ d.state  +'<br>'+'FI Rate in 2009: '+ Math.round(d.start*100) + '%' +'<br>'+'FI Rate in 2018: '+ Math.round(100*d.end) + '%' + '</br>' + 'Percent Change:  ' + Math.round(100*(d.end - d.start),2) + '%');
+                        .style('left', 100+'px')
+                        .style('top', 100+'px')
+                       // .style('left', posX+ "px")
+                       // .style('top', posY +'px')
+                        .html('<b>State: '+ data.state  +'<br>'+'FI Rate in 2009: '+ Math.round(data.start*100) + '%' +'<br>'+'FI Rate in 2018: '+ Math.round(100*data.end) + '%' + '</br>' + 'Percent Change:  ' + Math.round(100*(data.end - data.start),2) + '%');
                         })
-                .on("mouseleave", (event, d) => {
+                .on("mouseleave", (event, data) => {
                     // hide tooltip
                     d3.select('.state-tooltip')
                         .style('display', 'none');
