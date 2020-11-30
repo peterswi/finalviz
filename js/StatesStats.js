@@ -82,18 +82,21 @@ function StateStats(container){
             let tip = d3.selectAll('line')
                 .on("mouseenter", (event, d) => {
                     // show tooltip
-                    const pos = d3.pointer(event)
+                  //  const pos = d3.pointer(event, window)
+                  const posX = d3.event.pageX
+                  const posY = d3.event.pageY
+                   // let pos = d3.select(this).node().getBoundingClientRect();
                     console.log(pos)
                     console.log(d)
                     d3.select('.state-tooltip')
                         .attr('class', 'state-tooltip')
                         .style('display', 'inline-block')
-                       // .style('position', 'fixed')
+                        .style('position', 'absolute')
                         .style('font-style', 'italic')
-                       // .style('left', pos[0]+'px')
+                       // .style('left', pos[0]+10+'px')
                        // .style('top', pos[1]+'px')
-                        .style('left', 100+'px')
-                        .style('top', -100 +'px')
+                        .style('left', posX+ "px")
+                        .style('top', posY +'px')
                         .html('<b>State: '+ d.state  +'<br>'+'FI Rate in 2009: '+ Math.round(d.start*100) + '%' +'<br>'+'FI Rate in 2018: '+ Math.round(100*d.end) + '%' + '</br>' + 'Percent Change:  ' + Math.round(100*(d.end - d.start),2) + '%');
                         })
                 .on("mouseleave", (event, d) => {
