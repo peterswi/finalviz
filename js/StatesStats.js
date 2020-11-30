@@ -90,14 +90,14 @@ function StateStats(container){
                         .attr('class', 'state-tooltip')
                         .style('display', 'inline-block')
                         .style('position', 'absolute')
-                        .style('font-style', 'normal')
+                        .style('font-weight', 'bold')
                         .style('background-color','ivory')
                         .style('opacity', 0.7)
                         .style('color', 'black')
                         .style('padding', 5+'px')
                         .style('left', pos[0]+10+ "px")
                         .style('top', pos[1] +'px')
-                        .html(d3.select(".image").attr('src', data => 'js/states-images/'+data.image)+ '<br>State: '+ data.state  +'<br>'+'FI Rate in 2009: '+ Math.round(data.start*100) + '%' +'<br>'+'FI Rate in 2018: '+ Math.round(100*data.end) + '%' + '</br>' + 'Percent Change:  ' + Math.round(100*(data.end - data.start),2) + '%');
+                        .html( /*d3.select(".image").attr('src', data => 'js/states-images/'+data.image)+ <br> */'State: '+ data.state  +'<br>'+'FI Rate in 2009: '+ Math.round(data.start*100) + '%' +'<br>'+'FI Rate in 2018: '+ Math.round(100*data.end) + '%' + '</br>' + 'Percent Change:  ' + Math.round(100*(data.end - data.start),2) + '%');
                         })
                 .on("mouseleave", (event, data) => {
                     // hide tooltip
