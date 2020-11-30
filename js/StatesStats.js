@@ -3,20 +3,27 @@
 // Want to answer the question: where is food insecurity getitng worse? with a candlestick chart
 // HTML container = state-stat
 const margin = ({top: 15, right: 15, bottom: 50, left: 40})
-const width = 1200 - margin.left - margin.right
-const height = 600 - margin.top - margin.bottom
+const width = 1400 - margin.left - margin.right
+const height = 700 - margin.top - margin.bottom
 
 function StateStats(container){
     d3.csv('data/MMG_FIchange.csv').then(data => {
         console.log(data)
         let states = data.state
 
+        const svg = d3.select(container)
+            .append('svg')
+            .attr('width', width)  
+            .attr('height',height)
+            .attr('viewBox', [0,0,width+150, height+150])
+            .append('g')
+            .attr('transform', `translate(${width/16}, ${height/16})`)
 
-        let svg = d3.selectAll(container).append('svg')
+  /*      let svg = d3.selectAll(container).append('svg')
             .attr("width", width + margin.left + margin.right)
             .attr("height", height + margin.top + margin.bottom)
             .append("g")
-            .attr('transform', `translate(${width/16}, ${height/16})`)
+            .attr('transform', `translate(${width/16}, ${height/16})`) */
 
         let xScale = d3.scaleBand()
             .domain(data.map(data => data.state))
@@ -35,10 +42,11 @@ function StateStats(container){
 
         svg.append("g")
             .attr("class", "x-axis")
-            .attr("transform", `translate(1100,20)`)
+            .attr("transform", 'translate(-10,630)')
 
         svg.append("g")
             .attr("class", "y-axis")
+            .attr("transform", 'translate(-10,0)')
 
         let yAxisGroup = svg.select(".y-axis").call(yAxis)
         let xAxisGroup = svg.select(".x-axis").call(xAxis)
@@ -74,7 +82,7 @@ function StateStats(container){
             let tip = d3.selectAll('line')
                 .on("mouseenter", (event, d) => {
                     // show tooltip
-                    const pos = d3.pointer(event, window)
+                    const pos = d3.pointer(event)
                     console.log(pos)
                     console.log(d)
                     d3.select('.state-tooltip')
@@ -82,10 +90,10 @@ function StateStats(container){
                         .style('display', 'inline-block')
                         .style('position', 'fixed')
                         .style('font-style', 'italic')
-                        .style('left', (pos[0]-width)+5+'px')
-                        .style('top', (pos[1]-height)+5+'px')
-                        .style('left', 300+'px')
-                        .style('top', 300 +'px')
+                        .style('left', pos[0]+5+'px')
+                        .style('top', pos[1]+5+'px')
+                      //  .style('left', 300+'px')
+                      //  .style('top', 300 +'px')
                         .html('<b>State: '+ d.state  +'<br>'+'FI Rate in 2009: '+ Math.round(d.start*100) + '%' +'<br>'+'FI Rate in 2018: '+ Math.round(100*d.end) + '%' + '</br>' + 'Percent Change:  ' + Math.round(100*(d.end - d.start),2) + '%');
                         })
                 .on("mouseleave", (event, d) => {
