@@ -97,7 +97,7 @@ function StateStats(container){
                         .style('padding', 5+'px')
                         .style('left', pos[0]+10+ "px")
                         .style('top', pos[1] +'px')
-                        .html('<b>State: '+ data.state  +'<br>'+'FI Rate in 2009: '+ Math.round(data.start*100) + '%' +'<br>'+'FI Rate in 2018: '+ Math.round(100*data.end) + '%' + '</br>' + 'Percent Change:  ' + Math.round(100*(data.end - data.start),2) + '%');
+                        .html(data.image + '<br>State: '+ data.state  +'<br>'+'FI Rate in 2009: '+ Math.round(data.start*100) + '%' +'<br>'+'FI Rate in 2018: '+ Math.round(100*data.end) + '%' + '</br>' + 'Percent Change:  ' + Math.round(100*(data.end - data.start),2) + '%');
                         })
                 .on("mouseleave", (event, data) => {
                     // hide tooltip

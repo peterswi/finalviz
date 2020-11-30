@@ -1,52 +1,52 @@
-﻿state,start,end,diff
-AL,0.18,0.17,-0.01
-AK,0.14,0.13,-0.01
-AR,0.18,0.13,-0.05
-AZ,0.17,0.17,0
-CA,0.17,0.11,-0.06
-CO,0.14,0.1,-0.04
-CT,0.12,0.12,0
-DC,0.16,0.13,-0.03
-DE,0.12,0.12,0
-FL,0.17,0.13,-0.04
-GA,0.18,0.13,-0.05
-HI,0.13,0.11,-0.02
-IA,0.13,0.11,-0.02
-ID,0.16,0.1,-0.06
-IL,0.15,0.13,-0.02
-IN,0.16,0.1,-0.06
-KS,0.14,0.13,-0.01
-KY,0.17,0.15,-0.02
-LA,0.15,0.16,0.01
-MA,0.11,0.13,0.02
-MD,0.12,0.11,-0.01
-ME,0.15,0.09,-0.06
-MI,0.18,0.14,-0.04
-MN,0.11,0.08,-0.03
-MO,0.17,0.19,0.02
-MS,0.2,0.13,-0.07
-MT,0.14,0.1,-0.04
-NC,0.18,0.12,-0.06
-ND,0.08,0.13,0.05
-NE,0.12,0.09,-0.03
-NH,0.1,0.09,-0.01
-NJ,0.13,0.15,0.02
-NM,0.17,0.11,-0.06
-NV,0.16,0.14,-0.02
-NY,0.14,0.07,-0.07
-OH,0.17,0.14,-0.03
-OK,0.17,0.15,-0.02
-OR,0.17,0.12,-0.05
-PA,0.14,0.11,-0.03
-RI,0.16,0.11,-0.05
-SC,0.18,0.12,-0.06
-SD,0.12,0.11,-0.01
-TN,0.17,0.14,-0.03
-TX,0.18,0.15,-0.03
-UT,0.15,0.11,-0.04
-VA,0.12,0.11,-0.01
-VT,0.13,0.1,-0.03
-WA,0.15,0.11,-0.04
-WI,0.13,0.14,0.01
-WV,0.14,0.09,-0.05
-WY,0.12,0.12,0
+﻿state,start,end,diff, image
+AL,0.18,0.17,-0.01, AL-Alabama.png
+AK,0.14,0.13,-0.01, AK-Alaska.png
+AR,0.18,0.13,-0.05, AR-Arkansas.png
+AZ,0.17,0.17,0, AZ-Arizona.png
+CA,0.17,0.11,-0.06, CA-California.png
+CO,0.14,0.1,-0.04, CO-Colorado.png
+CT,0.12,0.12,0, CT-Connecticut.png
+DC,0.16,0.13,-0.03, DC-DC.png
+DE,0.12,0.12,0, DE-Delaware.png
+FL,0.17,0.13,-0.04, FL-Florida.png
+GA,0.18,0.13,-0.05, GA-Georgia.png
+HI,0.13,0.11,-0.02, HI-Hawaii.png
+IA,0.13,0.11,-0.02, IA-Iowa.png
+ID,0.16,0.1,-0.06, ID-Idaho.png
+IL,0.15,0.13,-0.02, IL-Illinois.png
+IN,0.16,0.1,-0.06, IN-Indiana.png
+KS,0.14,0.13,-0.01, KS-Kansas.png
+KY,0.17,0.15,-0.02, KY-Kentucky.png
+LA,0.15,0.16,0.01, LA-Louisiana.png
+MA,0.11,0.13,0.02, MA-Massachusetts.png
+MD,0.12,0.11,-0.01, MD-Maryland.png
+ME,0.15,0.09,-0.06, ME-Maine.png
+MI,0.18,0.14,-0.04, MI-Michigan.png
+MN,0.11,0.08,-0.03. MN-Minnesota.png
+MO,0.17,0.19,0.02, MO-Missouri.png
+MS,0.2,0.13,-0.07, MS-Mississippi.png
+MT,0.14,0.1,-0.04, MT-Montana.png
+NC,0.18,0.12,-0.06, NC-North-Carolina.png
+ND,0.08,0.13,0.05, ND-North-Dakota.png
+NE,0.12,0.09,-0.03, NE-Nebraska.png
+NH,0.1,0.09,-0.01, NH-New-Hampshire.png
+NJ,0.13,0.15,0.02, NJ-New-Jersey.png
+NM,0.17,0.11,-0.06, NM-New-Mexico.png
+NV,0.16,0.14,-0.02, NV-Nevada.png
+NY,0.14,0.07,-0.07, NY-New-York.png
+OH,0.17,0.14,-0.03, OH-Ohio.png
+OK,0.17,0.15,-0.02, OK-Oklahoma.png
+OR,0.17,0.12,-0.05, OR-Oregon.png
+PA,0.14,0.11,-0.03, PA-Pennsylvania.png
+RI,0.16,0.11,-0.05, RI-Rhode-Island.png
+SC,0.18,0.12,-0.06, SC-South-Carolina.png
+SD,0.12,0.11,-0.01, SD-South-Dakota.png
+TN,0.17,0.14,-0.03, TN-Tennessee.png
+TX,0.18,0.15,-0.03, TX-Texas.png
+UT,0.15,0.11,-0.04, UT-Utah.png
+VA,0.12,0.11,-0.01, VA-Virginia.png
+VT,0.13,0.1,-0.03, VT-Vermont.png
+WA,0.15,0.11,-0.04, WA-Washington.png
+WI,0.13,0.14,0.01, WI-Wisconsin.png
+WV,0.14,0.09,-0.05, WV-West-Virginia.png
+WY,0.12,0.12,0, WY-Wyoming.png
