@@ -36,9 +36,11 @@ function StateStats(container){
         let xAxis = d3.axisBottom()
             .scale(xScale)
             .ticks(51)
+        let formatPercent = d3.format(".0%");
 
         let yAxis = d3.axisLeft()
             .scale(yScale)
+            .tickFormat(formatPercent)
 
         svg.append("g")
             .attr("class", "x-axis")
@@ -49,7 +51,7 @@ function StateStats(container){
             .attr("transform", 'translate(-12,0)')
 
         let yAxisGroup = svg.select(".y-axis").call(yAxis)
-        let xAxisGroup = svg.select(".x-axis").call(xAxis)
+        let xAxisGroup = svg.select(".x-axis").call(xAxis).style('font-size', 13).style('font-weight', 'bold')
 
         svg.append('text')
             .attr('class','ytitle')
@@ -97,7 +99,7 @@ function StateStats(container){
                         .style('padding', 5+'px')
                         .style('left', pos[0]+10+ "px")
                         .style('top', pos[1] +'px')
-                        .html( /*d3.select(".image").attr('src', data => 'js/states-images/'+data.image)+ <br> */'State: '+ data.state  +'<br>'+'FI Rate in 2009: '+ Math.round(data.start*100) + '%' +'<br>'+'FI Rate in 2018: '+ Math.round(100*data.end) + '%' + '</br>' + 'Percent Change:  ' + Math.round(100*(data.end - data.start),2) + '%');
+                        .html('State: '+ data.state  +'<br>'+'FI Rate in 2009: '+ Math.round(data.start*100) + '%' +'<br>'+'FI Rate in 2018: '+ Math.round(100*data.end) + '%' + '</br>' + 'Percent Change:  ' + Math.round(100*(data.end - data.start),2) + '%');
                         })
                 .on("mouseleave", (event, data) => {
                     // hide tooltip
