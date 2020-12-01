@@ -63,7 +63,7 @@ function Introduction(container1, container2, container3){
 
         var legend = d3.legendColor()
             .scale(color)
-            .labelFormat(d3.format('.3f'))
+            .labelFormat(d3.format('.1%'))
             .title("Food Insecurity Rate")
         
         //MAP
@@ -276,7 +276,7 @@ function Introduction(container1, container2, container3){
                 .style('top', position[1]-10+'px')
                 .style('background-color','#99ccff')
                 .style('border-radius','10px')
-                .html('<b>State: '+nodes.name +'<br>'+'Number of Food Insecure Individuals: '+nodes.avgFInum+'<br>'+'Avg Food Insecurity Rate: '+nodes.avgFIrate+'</b>')
+                .html('<b>State: '+nodes.name +'<br>'+'Number of Food Insecure Individuals: '+nodes.avgFInum+'<b>')
         })
         .on("mouseleave", (event, nodes) => {
             d3.select('.tooltip')
