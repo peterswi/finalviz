@@ -1,6 +1,6 @@
-compare,total
-totFI,46425378
-canadaPop,37590000
-spainPop,46940000
-lifeMeals,89790
-life500,44895000
+compare,total,title
+totFI,46425378,Total US Food Insecurity
+canadaPop,37590000,Population of Canada
+spainPop,46940000,Population of Spain
+lifeMeals,89790,One Person's Meals in a Lifetime
+life500,44895000,500 Peoples' Meals in a Lifetime
