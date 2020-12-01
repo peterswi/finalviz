@@ -36,7 +36,7 @@ function StateStats(container){
         let xAxis = d3.axisBottom()
             .scale(xScale)
             .ticks(51)
-            
+
         let formatPercent = d3.format(".0%")
 
         let yAxis = d3.axisLeft()
@@ -107,6 +107,14 @@ function StateStats(container){
                     d3.select('.state-tooltip')
                         .style('display', 'none');
                 })
+
+                d3.select("#selectButton")
+                .selectAll('myOptions')
+                   .data(data)
+                    .enter()
+                    .append('option')
+                    .text(function (data) { return data.state; }) // text showed in the menu
+                    .attr("value", function (data) { return data.state; }) // corresponding value returned by the button
 
     })
 
