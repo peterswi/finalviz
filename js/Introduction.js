@@ -267,7 +267,7 @@ function Introduction(container1, container2, container3){
         let tool = d3.selectAll('circle')
         .on("mouseenter", (event, nodes) => {
             const position = d3.pointer(event, window)
-            console.log(nodes)
+            
             d3.select('.tooltip')
                 .attr('class','tooltip')
                 .style('display', 'inline-block')
@@ -281,7 +281,7 @@ function Introduction(container1, container2, container3){
                         return '<b>State: '+nodes.name +'<br>'+'Number of Food Insecure Individuals: '+nodes.avgFInum+'<b>'
                     }
                    if (nodes.total) {
-                       return '<b>Comparison: '+nodes.compare +'<br>'+'Total: '+nodes.total+'<b>'
+                       return '<b>Comparison: '+nodes.title +'<br>'+'Total: '+nodes.total+'<b>'
                    }
                 }
                     )
