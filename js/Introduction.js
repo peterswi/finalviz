@@ -107,9 +107,31 @@ function Introduction(container1, container2, container3){
             .style('font-style','Bold')
             .attr('font-size',40)
 
-           
-        // FORCE DIAGRAM-- next step is to add DRAG feature, allow for comparison
-        // should we add a 'total' to the force diagram?
+           //this toolTip not quite working
+            let toolTip = d3.selectAll('path')
+            .on("mouseenter", (event, nodes) => {
+                const position = d3.pointer(event, window)
+
+                let stateNode=nodes.properties.STUSPS
+                
+                d3.select('.tooltip2')
+                    .attr('class','tooltip2')
+                    .style('display', 'inline-block')
+                    .style('position', 'fixed')
+                    .style('left', position[0]+10+'px')
+                    .style('top', position[1]-10+'px')
+                    .style('background-color','#99ccff')
+                    .style('border-radius','10px')
+                    .html(function(d){
+                        console.log(nodes.properties.STUSPS)
+                        return ''+nodes.properties.STUSPS+''
+                    }
+                        )
+            })
+            .on("mouseleave", (event, nodes) => {
+                d3.select('.tooltip')
+                    .style('display', 'none')
+            })
 
         const svg2 = d3.select(container2)
             .append('svg')
@@ -258,12 +280,6 @@ function Introduction(container1, container2, container3){
             .style('font-style','Italic')
             .attr('font-size',26)
 
-            
-        //Should we get a tooltip going here to show the values behind these numbers
-   
-        
-
-        //adjust TOOLTIP TO WORK FOR the other circles
         let tool = d3.selectAll('circle')
         .on("mouseenter", (event, nodes) => {
             const position = d3.pointer(event, window)
@@ -290,7 +306,7 @@ function Introduction(container1, container2, container3){
             d3.select('.tooltip')
                 .style('display', 'none')
         })
-        console.log(compare)
+       
     })
 }
 export default Introduction
