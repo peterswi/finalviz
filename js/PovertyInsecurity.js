@@ -36,7 +36,7 @@ Promise.all([ // load multiple files
 
         var legend = d3.legendColor()
             .scale(color)
-            .labelFormat(d3.format('.3f'))
+            .labelFormat(d3.format('.1%'))
             .title("Child Poverty Rate")
         
         var legend2 = d3.legendColor()
