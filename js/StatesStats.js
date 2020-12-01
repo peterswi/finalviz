@@ -50,7 +50,7 @@ function StateStats(container){
             .attr("class", "y-axis")
             .attr("transform", 'translate(-12,0)')
 
-        let yAxisGroup = svg.select(".y-axis").call(yAxis)
+        let yAxisGroup = svg.select(".y-axis").call(yAxis).style('font-size', 14)
         let xAxisGroup = svg.select(".x-axis").call(xAxis).style('font-size', 13).style('font-weight', 'bold')
 
         svg.append('text')
