@@ -36,7 +36,8 @@ function StateStats(container){
         let xAxis = d3.axisBottom()
             .scale(xScale)
             .ticks(51)
-        let formatPercent = d3.format(".0%");
+            
+        let formatPercent = d3.format(".0%")
 
         let yAxis = d3.axisLeft()
             .scale(yScale)
