@@ -171,7 +171,7 @@ function Introduction(container1, container2, container3){
             .enter().append('text')
             .text(function(d){
                 if (d.compare=='totFI'){
-                    return "Avg Total Yearly Food Insecurity "
+                    return "US Food Insecure Population"
                 }
                 else if(d.compare=='canadaPop'){
                     return 'Population of Canada'
@@ -180,7 +180,7 @@ function Introduction(container1, container2, container3){
                     return 'Population of Spain'
                 }
                 else if(d.compare=='lifeMeals'){
-                    return "One individual's lifetime meals"
+                    return "Count of one person's lifetime meals"
                 }
                 else {
                     return "500 people's meals for a lifetime"
@@ -204,19 +204,19 @@ function Introduction(container1, container2, container3){
                     return 335
                 }
             })
-            .style('font-size',30)
+            .style('font-size',25)
             .style('text-anchor','middle')
             .style('font-style','Bold')
-
+/*
         svg2.append('text')
             .attr('class','relativeTitle')
-            .attr('x',700)
-            .attr('y',-5)
-            .text("Compare to the following ...")
+            .attr('x',1200)
+            .attr('y',0)
+            .text("Comparisons")
             .style('text-anchor','middle')
             .style('font-style','Bold')
             .attr('font-size',40)
-
+*/
         
         const stateForce = d3.forceSimulation(fiAvg)
             .force('charge', d3.forceManyBody().strength(-5))
@@ -242,18 +242,18 @@ function Introduction(container1, container2, container3){
         
         svg2.append('text')
             .attr('class','graphTitle')
-            .attr('x',250)
-            .attr('y',50)
+            .attr('x',half)
+            .attr('y',height-50)
             .text("Absolute Food Insecurity by State")
             .style('text-anchor','middle')
             .style('font-style','Bold')
-            .attr('font-size',40)
+            .attr('font-size',34)
 
         svg2.append('text')
             .attr('class','graphSubtitle')
             .attr('x',half)
             .attr('y',height)
-            .text("Drag each state for comparisons on the right ...")
+            .text("Drag each state to compare to the values on the right..")
             .style('text-anchor','middle')
             .style('font-style','Italic')
             .attr('font-size',26)
@@ -267,7 +267,7 @@ function Introduction(container1, container2, container3){
         let tool = d3.selectAll('circle')
         .on("mouseenter", (event, nodes) => {
             const position = d3.pointer(event, window)
-            
+            console.log(nodes)
             d3.select('.tooltip')
                 .attr('class','tooltip')
                 .style('display', 'inline-block')
@@ -276,12 +276,21 @@ function Introduction(container1, container2, container3){
                 .style('top', position[1]-10+'px')
                 .style('background-color','#99ccff')
                 .style('border-radius','10px')
-                .html('<b>State: '+nodes.name +'<br>'+'Number of Food Insecure Individuals: '+nodes.avgFInum+'<b>')
+                .html(function(d){
+                    if (nodes.state){
+                        return '<b>State: '+nodes.name +'<br>'+'Number of Food Insecure Individuals: '+nodes.avgFInum+'<b>'
+                    }
+                   if (nodes.total) {
+                       return '<b>Comparison: '+nodes.compare +'<br>'+'Total: '+nodes.total+'<b>'
+                   }
+                }
+                    )
         })
         .on("mouseleave", (event, nodes) => {
             d3.select('.tooltip')
                 .style('display', 'none')
         })
+        console.log(compare)
     })
 }
 export default Introduction
