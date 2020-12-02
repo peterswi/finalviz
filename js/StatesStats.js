@@ -78,6 +78,7 @@ function StateStats(container){
             .attr("x1", d => xScale(d.state))
             .attr("y2", d => yScale(d.end))
             .attr("x2", d => xScale(d.state)) 
+            .attr('class', 'line')
             .attr("stroke-width", 7)
             .attr("stroke", d => {
                 if (d.start < d.end) return d3.schemeSet1[0];
@@ -89,7 +90,10 @@ function StateStats(container){
                 .on("mouseenter", (event, data) => {
                     // show tooltip
                     const pos = d3.pointer(event, window)
-                   // let pos = d3.select(this).node().getBoundingClientRect();
+                   
+                    let st = d3.select(this)
+                    
+                    console.log(st)
                     console.log(pos)
                     console.log(data)
                     d3.select('.state-tooltip')
@@ -104,11 +108,23 @@ function StateStats(container){
                         .style('left', pos[0]+10+ "px")
                         .style('top', pos[1] +'px')
                         .html('State: '+ data.state  +'<br>'+'FI Rate in 2009: '+ Math.round(data.start*100) + '%' +'<br>'+'FI Rate in 2018: '+ Math.round(100*data.end) + '%' + '</br>' + 'Percent Change:  ' + Math.round(100*(data.end - data.start),2) + '%');
-                        })
+                    
+                        d3.select(".line").classed("line--hover", (data, i) => {
+                            console.log(data[i])
+                            return (st === data);
+                          })
+                          .classed("line--fade", (data, i) => {
+                            return (st !== data[i]);
+                          });   
+                    })
                 .on("mouseleave", (event, data) => {
                     // hide tooltip
                     d3.select('.state-tooltip')
                         .style('display', 'none');
+
+                    d3.selectAll(".line")
+                        .classed("line--hover", false)
+                        .classed("line--fade", false);
                 })
 
                 d3.select("#selectButton")
@@ -134,6 +150,8 @@ function StateStats(container){
                         })
 
                     }
+
+
                     let dataFilter = data.map(function(d){ return {state: selectedVal, start: d.start, end: d.end, diff: d.diff}})
                     line.datum(dataFilter)
                     .transition()
