@@ -121,7 +121,19 @@ function StateStats(container){
                 
                 
         function update(selectedVal) {
-                    if (selectedVal == "allstates")
+                    if (selectedVal == "allstates") {
+                        line
+                        .attr("y1", d => yScale(d.start))
+                        .attr("x1", d => xScale(d.state))
+                        .attr("y2", d => yScale(d.end))
+                        .attr("x2", d => xScale(d.state)) 
+                        .attr("stroke-width", 7)
+                        .attr("stroke", d => {
+                            if (d.start < d.end) return d3.schemeSet1[0];
+                            else return d3.schemeSet1[2];
+                        })
+
+                    }
                     let dataFilter = data.map(function(d){ return {state: selectedVal, start: d.start, end: d.end, diff: d.diff}})
                     line.datum(dataFilter)
                     .transition()
