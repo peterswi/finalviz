@@ -84,6 +84,7 @@ function StateStats(container){
                 if (d.start < d.end) return d3.schemeSet1[0];
                 else return d3.schemeSet1[2];
             })
+            //.stye('opacity', 0.75   )
 
 
             let tip = d3.selectAll('line')
