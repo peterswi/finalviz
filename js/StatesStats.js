@@ -127,7 +127,7 @@ function StateStats(container){
                         .classed("line--fade", false);
                 })
 
-                d3.select("#selectButton")
+             /*   d3.select("#selectButton")
                 .selectAll('myOptions')
                 .data(data)
                 .enter()
@@ -164,7 +164,8 @@ function StateStats(container){
                     .attr("stroke", d => {
                         if (d.start < d.end) return d3.schemeSet1[0];
                         else return d3.schemeSet1[2];
-                    })
+                    }) 
+
                 }
 
    
@@ -173,11 +174,10 @@ function StateStats(container){
             var selectedVal = d3.select(this).property("value")
             // run the updateChart function with this selected option
             // selectedVal = selected state
-            update(selectedVal)
+            update(selectedVal) */
         })
             
             
-})
 
 
 }
