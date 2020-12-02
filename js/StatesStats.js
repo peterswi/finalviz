@@ -91,9 +91,9 @@ function StateStats(container){
                     // show tooltip
                     const pos = d3.pointer(event, window)
                    
-                    let st = d3.select(this)
-                    
-                    console.log(st)
+                    let state = data.state
+                    console.log(state)
+
                     console.log(pos)
                     console.log(data)
                     d3.select('.state-tooltip')
@@ -109,12 +109,11 @@ function StateStats(container){
                         .style('top', pos[1] +'px')
                         .html('State: '+ data.state  +'<br>'+'FI Rate in 2009: '+ Math.round(data.start*100) + '%' +'<br>'+'FI Rate in 2018: '+ Math.round(100*data.end) + '%' + '</br>' + 'Percent Change:  ' + Math.round(100*(data.end - data.start),2) + '%');
                     
-                        d3.select(".line").classed("line--hover", (data, i) => {
-                            console.log(data[i])
-                            return (st === data);
+                        d3.selectAll(".line").classed("line--hover", (data, i) => {
+                                return (state === data.state);                          
                           })
                           .classed("line--fade", (data, i) => {
-                            return (st !== data[i]);
+                            return (state !== data.state);
                           });   
                     })
                 .on("mouseleave", (event, data) => {
