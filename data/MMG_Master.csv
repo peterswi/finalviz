@@ -1,4 +1,4 @@
-StateName,year,FoodInsecurityRate,NumberFoodInsecureIndividuals,Low Threshold in state,Low Threshold Type,High Threshold in state,High Threshold Type,% FI ? Low Threshold,% FI Btwn Thresholds,% FI > High Threshold,Weighted Annual Dollars,Cost Per Meal,childFINrate,Number Food Insecure Children (aggregate of counties),perChildrenBelowPov,% of children in FI HH with incomes above 185% FPL,unemp
+StateName,year,FoodInsecurityRate,NumberFoodInsecureIndividuals,Low Threshold in state,Low Threshold Type,High Threshold in state,High Threshold Type,% FI ? Low Threshold,% FI Btwn Thresholds,% FI > High Threshold,Weighted Annual Dollars,Cost Per Meal,childFINrate,Number Food Insecure Children (aggregate of counties),perChildrenBelow185Pov,% of children in FI HH with incomes above 185% FPL,unemp
 AL,2009,0.18,826770,1.3,SNAP,1.85,other nutrition pgm,0.46,0.23,0.32,354008530,2.56,0.27,299390,0.67,0.33,10
 AK,2009,0.14,90300,1.3,SNAP,1.85,other nutrition pgm,0.4,0.17,0.42,n/a,n/a,0.21,38090,0.55,0.45,10
 AR,2009,0.18,506600,1.3,SNAP,1.85,other nutrition pgm,0.49,0.2,0.3,209177940,2.47,0.29,200290,0.68,0.32,10
