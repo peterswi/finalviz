@@ -41,7 +41,7 @@ Promise.all([ // load multiple files
         
         var legend2 = d3.legendColor()
             .scale(color2)
-            .labelFormat(d3.format('.3f'))
+            .labelFormat(d3.format('.1%'))
             .title("Child Food Insecurity Rate")
 
   //Create Poverty Map
