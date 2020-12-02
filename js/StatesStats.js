@@ -22,11 +22,11 @@ function StateStats(container){
             .append('g')
             .attr('transform', `translate(${width/16}, ${height/16})`)
 
-  /*      let svg = d3.selectAll(container).append('svg')
-            .attr("width", width + margin.left + margin.right)
-            .attr("height", height + margin.top + margin.bottom)
-            .append("g")
-            .attr('transform', `translate(${width/16}, ${height/16})`) */
+        svg.append("text")
+            .attr('x', 430)
+            .attr('y', 0)
+            .text('Food Insecurity by State')
+            .style('font-size', 36)
 
         let xScale = d3.scaleBand()
             .domain(data.map(data => data.state))
@@ -59,8 +59,8 @@ function StateStats(container){
 
         svg.append('text')
             .attr('class','ytitle')
-            .attr('x',80)
-            .attr('y', 0)
+            .attr('x',75)
+            .attr('y', 20)
             .text('Food Insecurity Rate')
             .style('text-anchor', 'middle')
             
