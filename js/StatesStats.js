@@ -23,9 +23,9 @@ function StateStats(container){
             .attr('transform', `translate(${width/16}, ${height/16})`)
 
         svg.append("text")
-            .attr('x', 430)
+            .attr('x', 400)
             .attr('y', 0)
-            .text('Food Insecurity by State')
+            .text('Changes in Food Insecurity by State')
             .style('font-size', 36)
 
         let xScale = d3.scaleBand()
@@ -79,7 +79,7 @@ function StateStats(container){
             .attr("y2", d => yScale(d.end))
             .attr("x2", d => xScale(d.state)) 
             .attr('class', 'line')
-            .attr("stroke-width", 7)
+            .attr("stroke-width", 7.5)
             .attr("stroke", d => {
                 if (d.start < d.end) return d3.schemeSet1[0];
                 else return d3.schemeSet1[2];
