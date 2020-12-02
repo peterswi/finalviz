@@ -126,54 +126,7 @@ function StateStats(container){
                         .classed("line--fade", false);
                 })
 
-             /*   d3.select("#selectButton")
-                .selectAll('myOptions')
-                .data(data)
-                .enter()
-                .append('option')
-                .text(function (data) { return data.state; }) // text showed in the menu
-                .attr("value", function (data) { return data.state; }) // corresponding value returned by the button
-                
-                
-        function update(selectedVal) {
-                    if (selectedVal == "allstates") {
-                        line
-                        .attr("y1", d => yScale(d.start))
-                        .attr("x1", d => xScale(d.state))
-                        .attr("y2", d => yScale(d.end))
-                        .attr("x2", d => xScale(d.state)) 
-                        .attr("stroke-width", 7)
-                        .attr("stroke", d => {
-                            if (d.start < d.end) return d3.schemeSet1[0];
-                            else return d3.schemeSet1[2];
-                        })
-
-                    }
-
-
-                    let dataFilter = data.map(function(d){ return {state: selectedVal, start: d.start, end: d.end, diff: d.diff}})
-                    line.datum(dataFilter)
-                    .transition()
-                    .duration(500)
-                    .attr("d", d3.line)
-                    .attr("y1", d => yScale(d.start))
-                    .attr("x1", d => xScale(d.state))
-                    .attr("y2", d => yScale(d.end))
-                    .attr("x2", d => xScale(d.state)) 
-                    .attr("stroke", d => {
-                        if (d.start < d.end) return d3.schemeSet1[0];
-                        else return d3.schemeSet1[2];
-                    }) 
-
-                }
-
-   
-        d3.select("#selectButton").on("change", function(d) {
-            // recover the option that has been chosen
-            var selectedVal = d3.select(this).property("value")
-            // run the updateChart function with this selected option
-            // selectedVal = selected state
-            update(selectedVal) */
+  
         })
             
             
