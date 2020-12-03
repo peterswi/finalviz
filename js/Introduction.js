@@ -237,6 +237,13 @@ function Introduction(container2){
             d3.select('.tooltip')
                 .style('display', 'none')
         })
+
+        d3.select('#states').on('click', function(){
+            console.log('states')
+        })  
+        d3.select('#compare').on('click', function(){
+            console.log('compare')
+        })
        
     })
 }
