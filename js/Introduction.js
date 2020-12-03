@@ -27,7 +27,7 @@ let drag = stateForce => {
          
 
 }
-function Introduction(container1, container2, container3){
+function Introduction(container2){
 
     
 

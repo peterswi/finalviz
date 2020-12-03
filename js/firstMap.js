@@ -11,13 +11,15 @@ function FirstMap(container){
         const width=600
         const height=600
         const half=width/2
-
-        const color = d3.scaleQuantize([1, 9], d3.schemeBlues[8])
-        .domain(d3.extent(fiAvg, d=>d.avgFIrate))
-
-      
         const states=data[0]
         const fiAvg=data[1] 
+        const avg=new Map(fiAvg.map(d=>[d.state,d.avgFIrate]))
+
+        const color = d3.scaleQuantize([1, 9], d3.schemeBlues[8])
+            .domain(d3.extent(fiAvg, d=>d.avgFIrate))
+
+      
+       
    
         const projection = d3.geoAlbersUsa().fitSize([width, height], states);
         const path = d3.geoPath().projection(projection);
