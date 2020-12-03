@@ -90,7 +90,7 @@ Promise.all([ // load multiple files
             .append('svg')
             .attr('width', width)  
             .attr('height',height)
-            .attr('viewBox', [0,0,width+150, height+150])
+            .attr('viewBox', [0,0,width+250, height+150])
             .append('g')
             .attr('transform', `translate(${width/16}, ${height/16})`)
         
@@ -114,7 +114,7 @@ Promise.all([ // load multiple files
   
   
         svg2.append("g")
-            .attr("transform", "translate(560,350)")
+            .attr("transform", "translate(540,350)")
             .call(legend2)
             
         svg2.append('text')
