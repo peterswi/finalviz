@@ -62,9 +62,9 @@ function Introduction(container2){
 
         const svg2 = d3.select(container2)
             .append('svg')
-            .attr('width', 2.6*width)  
+            .attr('width', width+200)  
             .attr('height',height)
-            .attr('viewBox', [0,0,2.6*width+150, height+150])
+            .attr('viewBox', [0,0,width+150, height+150])
             .append('g')
             .attr('transform', `translate(${width/16}, ${height/16})`)
 
@@ -74,7 +74,172 @@ function Introduction(container2){
         const circleScale=d3.scaleLinear()
             .domain([min,max])
             .range([10,150])
+       
+        const stateForce = d3.forceSimulation(fiAvg)
+            .force('charge', d3.forceManyBody().strength(-5))
+            .force('center', d3.forceCenter().x(half).y(half))
         
+        const nodeElements=svg2.selectAll('circle1')
+            .data(fiAvg)
+            .enter().append('circle')
+                .attr('class', 'circle1')
+                .attr('r', d=> circleScale(d.avgFInum))
+                .attr('fill','#0066ff')
+                .style('stroke','white')
+                .style('opacity','0.7')
+                .call(drag(stateForce))
+                
+
+            
+        stateForce.on("tick", function(){
+            nodeElements    
+                .attr("cx", node=>node.x)
+                .attr("cy", node=>node.y) 
+            
+        })
+        
+        const compForce = d3.forceSimulation(compare)
+            .force('charge', d3.forceManyBody().strength(-5))
+            .force('center', d3.forceCenter().x(half).y(half))
+        
+        const nodes=svg2.selectAll('circle3')
+            .data(compare)
+            .enter().append('circle')
+                .attr('class', 'circle3')
+                .attr('r', d=> circleScale(d.total))
+                .attr('fill',function(d){
+                    if(d.compare=='canadaPop'){
+                        return 'red'
+                    }
+                    else if(d.compare=='spainPop'){
+                        return 'gold'
+                    }
+                    else if(d.compare=='totFI'){
+                        return '#0066ff'
+                    }
+                    else{
+                        return 'green'
+                    }
+                })
+                .style('stroke','white')
+                .style('opacity','0.7')
+                .call(drag(compForce))
+        
+        compForce.on("tick", function(){
+            nodes    
+                .attr("cx", -400)
+                .attr("cy", 0) 
+            
+        })
+        
+
+        const title=svg2.append('text')
+            .attr('class','graphTitle')
+            .attr('x',half)
+            .attr('y',0)
+            .text("Absolute Food Insecurity by State")
+            .style('text-anchor','middle')
+            .style('font-style','Bold')
+            .attr('font-size',34)
+
+        const subtitle=svg2.append('text')
+            .attr('class','graphSubtitle')
+            .attr('x',half)
+            .attr('y',height)
+            .text("Drag each state to compare to one another")
+            .style('text-anchor','middle')
+            .style('font-style','Italic')
+            .attr('font-size',26)
+
+        let tool = d3.selectAll('circle')
+        .on("mouseenter", (event, nodes) => {
+            const pos = d3.pointer(event, window)
+            
+            d3.select('.tooltip')
+                .attr('class', 'tooltip')
+                .style('display', 'inline-block')
+                .style('position', 'absolute')
+                .style('font-weight', 'bold')
+                .style('background-color','#99ccff')
+                .style('opacity', 0.7)
+                .style('color', 'black')
+                .style('padding', 5+'px')
+                .style('border-radius','10px')
+                .style('left', pos[0]+10+ "px")
+                .style('top', pos[1] +'px')
+                .html(function(d){
+                    if (nodes.state){
+                        return '<b>State: '+nodes.name +'<br>'+'Number of Food Insecure Individuals: '+nodes.avgFInum+'<b>'
+                    }
+                   if (nodes.total) {
+                       return '<b>Comparison: '+nodes.title +'<br>'+'Total: '+nodes.total+'<b>'
+                   }
+                }
+                    )
+        })
+        .on("mouseleave", (event, nodes) => {
+            d3.select('.tooltip')
+                .style('display', 'none')
+        })
+
+        d3.select('#states').on('click', function(){
+            visType='states'
+            console.log('states')
+            
+            
+            compForce.on("tick", function(){
+                nodes   
+                    .attr("cx", -400)
+                    .attr("cy", 0)      
+            })
+            title.transition().duration(2000)
+                .text("Absolute Food Insecurity by state")
+
+            subtitle.transition().duration(2000)
+                .text("Drag each state to compare to one another")
+
+            stateForce.alphaTarget(0.01).restart()
+            stateForce.on("tick", function(){
+                nodeElements   
+                    .attr("cx", node=>node.x)
+                    .attr("cy", node=>node.y) 
+                    
+            }) 
+            
+
+            
+        })  
+        d3.select('#compare').on('click', function(){
+            visType='compare'
+            console.log('compare')
+            stateForce.on("tick", function(){
+                nodeElements 
+                    .attr("cx", -400)
+                    .attr("cy", 0)      
+            })
+            title.transition()
+                .duration(2000)
+                .text("Comparing food insecurity to world populations")
+
+            subtitle.transition().duration(2000)
+                .text("Drag each population to compare to one another")
+
+            compForce.alphaTarget(0.05).restart()
+            nodes.transition(2000)
+                .attr("cx", node=>node.x)
+                .attr("cy", node=>node.y) 
+                
+
+            compForce.on("tick", function(){
+                nodes   
+                    .attr("cx", node=>node.x)
+                    .attr("cy", node=>node.y) 
+                    
+            }) 
+            
+        })
+        /*
+         
         svg2.selectAll('circle2')
             .data(compare)
             .enter().append('circle')
@@ -156,7 +321,7 @@ function Introduction(container2){
             .style('font-size',25)
             .style('text-anchor','middle')
             .style('font-style','Bold')
-/*
+
         svg2.append('text')
             .attr('class','relativeTitle')
             .attr('x',1200)
@@ -167,155 +332,6 @@ function Introduction(container2){
             .attr('font-size',40)
 */
         
-        const stateForce = d3.forceSimulation(fiAvg)
-            .force('charge', d3.forceManyBody().strength(-5))
-            .force('center', d3.forceCenter().x(half).y(half))
-        
-        const nodeElements=svg2.selectAll('circle1')
-            .data(fiAvg)
-            .enter().append('circle')
-                .attr('class', 'circle1')
-                .attr('r', d=> circleScale(d.avgFInum))
-                .attr('fill','#0066ff')
-                .style('stroke','white')
-                .style('opacity','0.7')
-                .call(drag(stateForce))
-                
-
-            
-        stateForce.on("tick", function(){
-            nodeElements    
-                .attr("cx", node=>node.x)
-                .attr("cy", node=>node.y) 
-            
-        })
-        
-        const compForce = d3.forceSimulation(compare)
-            .force('charge', d3.forceManyBody().strength(-5))
-            .force('center', d3.forceCenter().x(half).y(half))
-        
-        const nodes=svg2.selectAll('circle3')
-            .data(compare)
-            .enter().append('circle')
-                .attr('class', 'circle3')
-                .attr('r', d=> circleScale(d.total))
-                .attr('fill',function(d){
-                    if(d.compare=='canadaPop'){
-                        return 'red'
-                    }
-                    else if(d.compare=='spainPop'){
-                        return 'gold'
-                    }
-                    else if(d.compare=='totFI'){
-                        return '#0066ff'
-                    }
-                    else{
-                        return 'green'
-                    }
-                })
-                .style('stroke','white')
-                .style('opacity','0.7')
-                .call(drag(compForce))
-        
-        compForce.on("tick", function(){
-            nodes    
-                .attr("cx", 0)
-                .attr("cy", 0) 
-            
-        })
-        
-
-        svg2.append('text')
-            .attr('class','graphTitle')
-            .attr('x',half)
-            .attr('y',height-50)
-            .text("Absolute Food Insecurity by State")
-            .style('text-anchor','middle')
-            .style('font-style','Bold')
-            .attr('font-size',34)
-
-        svg2.append('text')
-            .attr('class','graphSubtitle')
-            .attr('x',half)
-            .attr('y',height)
-            .text("Drag each state to compare to the values on the right..")
-            .style('text-anchor','middle')
-            .style('font-style','Italic')
-            .attr('font-size',26)
-
-        let tool = d3.selectAll('circle')
-        .on("mouseenter", (event, nodes) => {
-            const pos = d3.pointer(event, window)
-            
-            d3.select('.tooltip')
-                .attr('class', 'tooltip')
-                .style('display', 'inline-block')
-                .style('position', 'absolute')
-                .style('font-weight', 'bold')
-                .style('background-color','#99ccff')
-                .style('opacity', 0.7)
-                .style('color', 'black')
-                .style('padding', 5+'px')
-                .style('border-radius','10px')
-                .style('left', pos[0]+10+ "px")
-                .style('top', pos[1] +'px')
-                .html(function(d){
-                    if (nodes.state){
-                        return '<b>State: '+nodes.name +'<br>'+'Number of Food Insecure Individuals: '+nodes.avgFInum+'<b>'
-                    }
-                   if (nodes.total) {
-                       return '<b>Comparison: '+nodes.title +'<br>'+'Total: '+nodes.total+'<b>'
-                   }
-                }
-                    )
-        })
-        .on("mouseleave", (event, nodes) => {
-            d3.select('.tooltip')
-                .style('display', 'none')
-        })
-
-        d3.select('#states').on('click', function(){
-            visType='states'
-            console.log('states')
-            
-            compForce.on("tick", function(){
-                nodes   
-                    .attr("cx", -400)
-                    .attr("cy", 0)      
-            })
-            stateForce.alphaTarget(0.01).restart()
-            stateForce.on("tick", function(){
-                nodeElements   
-                    .attr("cx", node=>node.x)
-                    .attr("cy", node=>node.y) 
-                    
-            }) 
-            
-
-            
-        })  
-        d3.select('#compare').on('click', function(){
-            visType='compare'
-            console.log('compare')
-            stateForce.on("tick", function(){
-                nodeElements 
-                    .attr("cx", -400)
-                    .attr("cy", 0)      
-            })
-            compForce.alphaTarget(0.05).restart()
-            nodes.transition(2000)
-                .attr("cx", node=>node.x)
-                .attr("cy", node=>node.y) 
-                
-
-            compForce.on("tick", function(){
-                nodes   
-                    .attr("cx", node=>node.x)
-                    .attr("cy", node=>node.y) 
-                    
-            }) 
-            
-        })
        
     })
 }
