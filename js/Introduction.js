@@ -1,5 +1,5 @@
 //WILL
-let visType
+let visType = 'states'
 
 let drag = stateForce => {
 
@@ -178,9 +178,10 @@ function Introduction(container2){
                 .attr('r', d=> circleScale(d.avgFInum))
                 .attr('fill','#0066ff')
                 .style('stroke','white')
+                .style('opacity','0.7')
                 .call(drag(stateForce))
-       
-         .attr('font-size',12)
+                
+
             
         stateForce.on("tick", function(){
             nodeElements    
@@ -189,6 +190,41 @@ function Introduction(container2){
             
         })
         
+        const compForce = d3.forceSimulation(compare)
+            .force('charge', d3.forceManyBody().strength(-5))
+            .force('center', d3.forceCenter().x(half).y(half))
+        
+        const nodes=svg2.selectAll('circle3')
+            .data(compare)
+            .enter().append('circle')
+                .attr('class', 'circle3')
+                .attr('r', d=> circleScale(d.total))
+                .attr('fill',function(d){
+                    if(d.compare=='canadaPop'){
+                        return 'red'
+                    }
+                    else if(d.compare=='spainPop'){
+                        return 'gold'
+                    }
+                    else if(d.compare=='totFI'){
+                        return '#0066ff'
+                    }
+                    else{
+                        return 'green'
+                    }
+                })
+                .style('stroke','white')
+                .style('opacity','0.7')
+                .call(drag(compForce))
+        
+        compForce.on("tick", function(){
+            nodes    
+                .attr("cx", 0)
+                .attr("cy", 0) 
+            
+        })
+        
+
         svg2.append('text')
             .attr('class','graphTitle')
             .attr('x',half)
@@ -216,7 +252,7 @@ function Introduction(container2){
                 .style('display', 'inline-block')
                 .style('position', 'absolute')
                 .style('font-weight', 'bold')
-                .style('background-color','ivory')
+                .style('background-color','#99ccff')
                 .style('opacity', 0.7)
                 .style('color', 'black')
                 .style('padding', 5+'px')
@@ -239,10 +275,46 @@ function Introduction(container2){
         })
 
         d3.select('#states').on('click', function(){
+            visType='states'
             console.log('states')
+            
+            compForce.on("tick", function(){
+                nodes   
+                    .attr("cx", -400)
+                    .attr("cy", 0)      
+            })
+            stateForce.alphaTarget(0.01).restart()
+            stateForce.on("tick", function(){
+                nodeElements   
+                    .attr("cx", node=>node.x)
+                    .attr("cy", node=>node.y) 
+                    
+            }) 
+            
+
+            
         })  
         d3.select('#compare').on('click', function(){
+            visType='compare'
             console.log('compare')
+            stateForce.on("tick", function(){
+                nodeElements 
+                    .attr("cx", -400)
+                    .attr("cy", 0)      
+            })
+            compForce.alphaTarget(0.05).restart()
+            nodes.transition(2000)
+                .attr("cx", node=>node.x)
+                .attr("cy", node=>node.y) 
+                
+
+            compForce.on("tick", function(){
+                nodes   
+                    .attr("cx", node=>node.x)
+                    .attr("cy", node=>node.y) 
+                    
+            }) 
+            
         })
        
     })
