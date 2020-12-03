@@ -1,4 +1,5 @@
 //WILL
+let visType
 
 let drag = stateForce => {
 
