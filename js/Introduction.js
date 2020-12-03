@@ -209,16 +209,20 @@ function Introduction(container2){
 
         let tool = d3.selectAll('circle')
         .on("mouseenter", (event, nodes) => {
-            const position = d3.pointer(event, window)
+            const pos = d3.pointer(event, window)
             
             d3.select('.tooltip')
-                .attr('class','tooltip')
+                .attr('class', 'tooltip')
                 .style('display', 'inline-block')
-                .style('position', 'fixed')
-                .style('left', position[0]+10+'px')
-                .style('top', position[1]-10+'px')
-                .style('background-color','#99ccff')
+                .style('position', 'absolute')
+                .style('font-weight', 'bold')
+                .style('background-color','ivory')
+                .style('opacity', 0.7)
+                .style('color', 'black')
+                .style('padding', 5+'px')
                 .style('border-radius','10px')
+                .style('left', pos[0]+10+ "px")
+                .style('top', pos[1] +'px')
                 .html(function(d){
                     if (nodes.state){
                         return '<b>State: '+nodes.name +'<br>'+'Number of Food Insecure Individuals: '+nodes.avgFInum+'<b>'
