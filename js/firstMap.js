@@ -75,25 +75,27 @@ function FirstMap(container){
         let toolTip = d3.selectAll('path')
         .on("mouseenter", (event, nodes) => {
             const position = d3.pointer(event, window)
-
+            let d = data 
+            console.log(d)
             let stateNode=nodes.properties.STUSPS
-            
             d3.select('.tooltip2')
                 .attr('class','tooltip2')
                 .style('display', 'inline-block')
-                .style('position', 'fixed')
+                .style('position', 'absolute')
                 .style('left', position[0]+10+'px')
                 .style('top', position[1]-10+'px')
                 .style('background-color','#99ccff')
                 .style('border-radius','10px')
-                .html(function(d){
+                .style('padding', 5+'px')
+                .html('State: '+ nodes.properties.NAME +'<br> Average Rate: ' + data.avgFIrate)
+                /*.html(function(d){
                     console.log(nodes.properties.STUSPS)
                     return ''+nodes.properties.STUSPS+''
                 }
-                    )
+                    ) */
         })
         .on("mouseleave", (event, nodes) => {
-            d3.select('.tooltip')
+            d3.select('.tooltip2')
                 .style('display', 'none')
         })
     }) 
