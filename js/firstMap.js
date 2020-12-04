@@ -8,8 +8,8 @@ function FirstMap(container){
         d3.csv('data/MMG_Avg.csv',d3.autoType)
     ]).then(data=>{
 
-        const width=600
-        const height=600
+        const width=1000
+        const height=800
         const half=width/2
         const states=data[0]
         const fiAvg=data[1] 
@@ -59,7 +59,7 @@ function FirstMap(container){
         .attr("stroke", "black");
     
     svg.append("g")
-        .attr("transform", "translate(560,350)")
+        .attr("transform", "translate(900,500)")
         .call(legend)
         
     svg.append('text')
