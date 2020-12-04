@@ -127,8 +127,32 @@ function Introduction(container2){
         
         compForce.on("tick", function(){
             nodes    
-                .attr("cx", -400)
-                .attr("cy", 0) 
+                .attr("cx", function(d, i) { 
+                    d.x=i * 150+ 30
+                    return -400; 
+                })
+                .attr("cy", function(d){
+                    if (d.compare=='totFI'){
+                        d.y=175
+                        return d.y
+                    }
+                    else if(d.compare=='canadaPop'){
+                        d.y=425
+                        return d.y
+                    }
+                    else if (d.compare=='spainPop'){
+                        d.y=175
+                        return d.y
+                    }
+                    else if(d.compare=='lifeMeals'){
+                        d.y=425
+                        return d.y
+                    }
+                    else {
+                        d.y=175
+                        return d.y
+                    }
+                }) 
             
         })
         
@@ -217,7 +241,7 @@ function Introduction(container2){
                     .attr("cx", -400)
                     .attr("cy", 0)      
             })
-            title.transition()
+            svg2.select('.graphTitle').transition()
                 .duration(2000)
                 .text("Comparing food insecurity to world populations")
 
@@ -225,7 +249,7 @@ function Introduction(container2){
                 .text("Drag each population to compare to one another")
 
             compForce.alphaTarget(0.05).restart()
-            nodes.transition(2000)
+            nodes.transition().duration(2000)
                 .attr("cx", node=>node.x)
                 .attr("cy", node=>node.y) 
                 
