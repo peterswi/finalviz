@@ -249,11 +249,7 @@ function Introduction(container2){
                 .text("Drag each population to compare to one another")
 
             compForce.alphaTarget(0.05).restart()
-            nodes.transition().duration(2000)
-                .attr("cx", node=>node.x)
-                .attr("cy", node=>node.y) 
-                
-
+            
             compForce.on("tick", function(){
                 nodes   
                     .attr("cx", node=>node.x)
