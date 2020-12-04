@@ -193,7 +193,7 @@ function Introduction(container2){
                     .attr("cy", 0)      
             })
             title.transition().duration(2000)
-                .text("Absolute Food Insecurity by state")
+                .text("Absolute Food Insecurity by State")
 
             subtitle.transition().duration(2000)
                 .text("Drag each state to compare to one another")
