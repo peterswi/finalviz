@@ -21,7 +21,7 @@ function createLabel(event, nodes, data) {
                 .style('background-color','#99ccff')
                 .style('border-radius','10px')
                 .style('padding', 5+'px')
-                .html('State: '+ nodes.properties.NAME + '<br>Avg FI Rate: ' + avgRate) 
+                .html('State: '+ nodes.properties.NAME + '<br>Avg FI Rate: ' + Math.round(avgRate*1000)/10 + '%') 
 }
 
 function FirstMap(container){
