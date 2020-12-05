@@ -205,8 +205,42 @@ function Introduction(container2){
             d3.select('.tooltip')
                 .style('display', 'none')
         })
+/*
+        function update(data){
+            console.log(data)
+            nodes.data(data)
+                .join(enter=> enter.append('circle')
+                .attr('r', d=> circleScale(d.avgFInum))
+                .attr('fill','#0066ff'))
+              
+            compForce.nodes(nodes)
+            compForce.alphaTarget(0.05).restart()
+/*
+            nodes.enter().append('circle')
+                .merge(nodes)
+                .call(function(nodes){
+                    nodes
+                    .transition()
+                    .duration(1000)
+                        .attr('r', d=> circleScale(d.avgFInum))
+                })
+                .attr('fill','#0066ff')
+            
+            nodes.exit()
+                .tranisition()
+                .duration(1000)
+                .remove()
+            
+          }
+            */
+        
+        
+                
 
+      
         d3.select('#states').on('click', function(){
+            //update(fiAvg)
+            
             visType='states'
             console.log('states')
             
@@ -234,6 +268,7 @@ function Introduction(container2){
             
         })  
         d3.select('#compare').on('click', function(){
+            
             visType='compare'
             console.log('compare')
             stateForce.on("tick", function(){
@@ -248,7 +283,7 @@ function Introduction(container2){
             subtitle.transition().duration(2000)
                 .text("Drag each population to compare to one another")
 
-            compForce.alphaTarget(0.05).restart()
+            compForce.alphaTarget(0.1).restart()
             
             compForce.on("tick", function(){
                 nodes   
