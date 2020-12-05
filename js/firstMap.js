@@ -1,13 +1,11 @@
 
 function createLabel(event, nodes, data) {
     const position = d3.pointer(event, window)
-    let d = data 
-    console.log(d)
     let avgRate;
     let stateNode=nodes.properties.STUSPS
     for (let i = 0; i < data[1].length; i++) {
         if (data[1][i].state == stateNode) {
-            console.log(data[1][i].avgFIrate)
+           // console.log(data[1][i].avgFIrate)
             avgRate = data[1][i].avgFIrate;
             break;
         }
@@ -19,9 +17,12 @@ function createLabel(event, nodes, data) {
                 .style('left', position[0]+10+'px')
                 .style('top', position[1]-10+'px')
                 .style('background-color','#99ccff')
+                .style('opacity', 0.7)
                 .style('border-radius','10px')
                 .style('padding', 5+'px')
-                .html('State: '+ nodes.properties.NAME + '<br>Avg FI Rate: ' + Math.round(avgRate*1000)/10 + '%') 
+                .style('color', 'black')
+                .style('font-weight', 'bold')
+                .html('State: '+ nodes.properties.NAME + '<br>Avg FI Rate: ' + Math.round(avgRate*1000)/10 + '%')  
 }
 
 function FirstMap(container){
