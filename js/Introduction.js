@@ -44,8 +44,8 @@ function Introduction(container2){
         
         const avg=new Map(fiAvg.map(d=>[d.state,d.avgFIrate]))
 
-        const width=600
-        const height=600
+        const width=1000
+        const height=1000
         const half=width/2
         
         const color = d3.scaleQuantize([1, 9], d3.schemeBlues[8])
@@ -73,10 +73,10 @@ function Introduction(container2){
         
         const circleScale=d3.scaleLinear()
             .domain([min,max])
-            .range([10,150])
+            .range([20,200])
        
         const stateForce = d3.forceSimulation(fiAvg)
-            .force('charge', d3.forceManyBody().strength(-5))
+            .force('charge', d3.forceManyBody().strength(-19))
             .force('center', d3.forceCenter().x(half).y(half))
         
         const nodeElements=svg2.selectAll('circle1')
@@ -128,28 +128,28 @@ function Introduction(container2){
         compForce.on("tick", function(){
             nodes    
                 .attr("cx", function(d, i) { 
-                    d.x=i * 150+ 30
+                    d.x=i * 200+ 30
                     return -400; 
                 })
                 .attr("cy", function(d){
                     if (d.compare=='totFI'){
-                        d.y=175
+                        d.y=150
                         return d.y
                     }
                     else if(d.compare=='canadaPop'){
-                        d.y=425
+                        d.y=450
                         return d.y
                     }
                     else if (d.compare=='spainPop'){
-                        d.y=175
+                        d.y=150
                         return d.y
                     }
                     else if(d.compare=='lifeMeals'){
-                        d.y=425
+                        d.y=450
                         return d.y
                     }
                     else {
-                        d.y=175
+                        d.y=150
                         return d.y
                     }
                 }) 
