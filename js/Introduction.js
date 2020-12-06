@@ -231,7 +231,7 @@ function Introduction(container2){
             compForce.on("tick", function(){
                 nodes.transition().duration(dur)   
                     .attr("cx", -400)
-                    .attr("cy", 0)      
+                    .attr("cy", 0) 
             })
             title.transition().duration(2000)
                 .text("Absolute Food Insecurity by State")
@@ -243,7 +243,8 @@ function Introduction(container2){
             stateForce.on("tick", function(){
                 nodeElements.transition().duration(dur)   
                     .attr("cx", node=>node.x)
-                    .attr("cy", node=>node.y)        
+                    .attr("cy", node=>node.y)
+      
             }) 
         })  
         d3.select('#compare').on('click', function(){
@@ -265,8 +266,7 @@ function Introduction(container2){
             compForce.on("tick", function(){
                 nodes.transition().duration(dur)   
                     .attr("cx", node=>node.x)
-                    .attr("cy", node=>node.y) 
-                    
+                    .attr("cy", node=>node.y)
             }) 
             
         })
