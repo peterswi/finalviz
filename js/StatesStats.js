@@ -109,7 +109,7 @@ function StateStats(container){
                         .style('left', pos[0]+10+ "px")
                         .style('top', pos[1] +'px')
                         .html('State: '+ data.state  +'<br>'+'FI Rate in 2009: '+ Math.round(data.start*100) + '%' +'<br>'+'FI Rate in 2018: '+ Math.round(100*data.end) + '%' + '</br>' + 'Percent Change:  ' + Math.round(100*(data.end - data.start),2) + '%');
-                    
+                        
                         d3.selectAll(".line").classed("line--hover", (data, i) => {
                                 return (state === data.state);                          
                           })
@@ -125,6 +125,8 @@ function StateStats(container){
                     d3.selectAll(".line")
                         .classed("line--hover", false)
                         .classed("line--fade", false);
+                    d3.selectAll("path")
+                        .style("stroke", "#000000")
                 })
 
   

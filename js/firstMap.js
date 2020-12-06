@@ -102,26 +102,16 @@ function FirstMap(container){
         .on("mouseenter", (event, nodes) => {
             let d = data 
             createLabel(event, nodes, d)
-            /*
-            d3.select('.tooltip2')
-                .attr('class','tooltip2')
-                .style('display', 'inline-block')
-                .style('position', 'absolute')
-                .style('left', position[0]+10+'px')
-                .style('top', position[1]-10+'px')
-                .style('background-color','#99ccff')
-                .style('border-radius','10px')
-                .style('padding', 5+'px')
-                .html('State: '+ nodes.properties.NAME +'<br> Average Rate: ' + d.avgFIrate)
-                /*.html(function(d){
-                    console.log(nodes.properties.STUSPS)
-                    return ''+nodes.properties.STUSPS+''
-                }
-                    ) */
+            d3.select(event.currentTarget)
+                .style("stroke", "black")
+                .style('stroke-width', 5+'px')
         })
         .on("mouseleave", (event, nodes) => {
             d3.select('.tooltip2')
                 .style('display', 'none')
+            d3.selectAll("path")
+                .style("stroke", "#000000")
+                .style('stroke-width', 1+'px')
         })
     }) 
 
