@@ -23,7 +23,7 @@ function StateStats(container){
             .attr('transform', `translate(${width/16}, ${height/16})`)
 
         svg.append("text")
-            .attr('x', 400)
+            .attr('x', 420)
             .attr('y', 0)
             .text('Changes in Food Insecurity by State')
             .style('font-size', 36)
@@ -125,8 +125,6 @@ function StateStats(container){
                     d3.selectAll(".line")
                         .classed("line--hover", false)
                         .classed("line--fade", false);
-                    d3.selectAll("path")
-                        .style("stroke", "#000000")
                 })
 
   
