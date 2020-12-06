@@ -207,7 +207,7 @@ function Introduction(container2){
                         return '<b>State: '+nodes.name +'<br>'+'Number of Food Insecure Individuals: '+milFormat(nodes.avgFInum)+'<b>'
                     }
                    if (nodes.total) {
-                       return '<b>Comparison: '+nodes.title +'<br>'+'Total: '+milFormat(nodes.total)+'<b>'
+                       return '<b>Comparison: '+nodes.title +'<br>'+'Total: '+milFormat(nodes.total)+' people<b>'
                    }
                 }
                     )
