@@ -138,8 +138,8 @@ Promise.all([ // load multiple files
                     .filter(function() {
                       return d3.select(this).attr("id") == nodes.properties.NAME;
                     })
-                    //.style('fill-opacity', 0.7)
                     .style("stroke", "#000000")
+                  //.style('fill-opacity', 0.7)
                   // createLabel(event, nodes, d)
               })
               .on("mouseleave", (event, nodes) => {
@@ -148,6 +148,7 @@ Promise.all([ // load multiple files
                   .filter(function() {
                     return d3.select(this).attr("id") == nodes.properties.NAME; // filter by single attribute
                   })
+                  .style("stroke", "#000000")
                   .style('fill-opacity', 1)
                   // d3.select('.tooltip2')
                   //     .style('display', 'none')
