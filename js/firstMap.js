@@ -1,4 +1,29 @@
 
+function createLabel(event, nodes, data) {
+    const position = d3.pointer(event, window)
+    let avgRate;
+    let stateNode=nodes.properties.STUSPS
+    for (let i = 0; i < data[1].length; i++) {
+        if (data[1][i].state == stateNode) {
+           // console.log(data[1][i].avgFIrate)
+            avgRate = data[1][i].avgFIrate;
+            break;
+        }
+        }
+    d3.select('.tooltip2')
+                .attr('class','tooltip2')
+                .style('display', 'inline-block')
+                .style('position', 'absolute')
+                .style('left', position[0]+10+'px')
+                .style('top', position[1]-10+'px')
+                .style('background-color','#99ccff')
+                .style('opacity', 0.7)
+                .style('border-radius','10px')
+                .style('padding', 5+'px')
+                .style('color', 'black')
+                .style('font-weight', 'bold')
+                .html('State: '+ nodes.properties.NAME + '<br>Avg FI Rate: ' + Math.round(avgRate*1000)/10 + '%')  
+}
 
 function FirstMap(container){
     
@@ -8,6 +33,7 @@ function FirstMap(container){
         d3.csv('data/MMG_Avg.csv',d3.autoType)
     ]).then(data=>{
 
+        console.log(data)
         const width=1000
         const height=800
         const half=width/2
@@ -74,10 +100,9 @@ function FirstMap(container){
        //this toolTip not quite working
         let toolTip = d3.selectAll('path')
         .on("mouseenter", (event, nodes) => {
-            const position = d3.pointer(event, window)
             let d = data 
-            console.log(d)
-            let stateNode=nodes.properties.STUSPS
+            createLabel(event, nodes, d)
+            /*
             d3.select('.tooltip2')
                 .attr('class','tooltip2')
                 .style('display', 'inline-block')
@@ -87,7 +112,7 @@ function FirstMap(container){
                 .style('background-color','#99ccff')
                 .style('border-radius','10px')
                 .style('padding', 5+'px')
-                .html('State: '+ nodes.properties.NAME +'<br> Average Rate: ' + data.avgFIrate)
+                .html('State: '+ nodes.properties.NAME +'<br> Average Rate: ' + d.avgFIrate)
                 /*.html(function(d){
                     console.log(nodes.properties.STUSPS)
                     return ''+nodes.properties.STUSPS+''
