@@ -138,7 +138,7 @@ Promise.all([ // load multiple files
                     .filter(function() {
                       return d3.select(this).attr("id") == nodes.properties.NAME;
                     })
-                    .style('fill-opacity', 0.7)
+                    //.style('fill-opacity', 0.7)
                     .style("stroke", "#000000")
                   // createLabel(event, nodes, d)
               })
