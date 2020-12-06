@@ -143,7 +143,7 @@ Promise.all([ // load multiple files
                   // createLabel(event, nodes, d)
               })
               .on("mouseleave", (event, nodes) => {
-                d3.select(event.currentTarget).style("stroke", "#000000")//.style('fill-opacity', 1)
+                d3.select(event.currentTarget).style("stroke", "#000000").style('fill-opacity', 1)
                 svg2.selectAll("path")
                   .filter(function() {
                     return d3.select(this).attr("id") == nodes.properties.NAME; // filter by single attribute
