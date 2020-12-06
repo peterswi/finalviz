@@ -6,8 +6,7 @@
         <!-- Milligram CSS -->
        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/milligram/1.4.1/milligram.css">
         <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css"> -->
-        <!--My Style Sheet -->
-        <link rel="stylesheet" href="styles.css">
+        
 
         <!--Our Scripts-->
         <script defer src="https://d3js.org/d3.v6.min.js"></script>
@@ -18,11 +17,6 @@
         <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.12.2"></script>
 
 
-        <!-- trying to get hacky with D3 and choropleth
-        <script defer src="//unpkg.com/d3@5/dist/d3.min.js"></script>
-        <script defer src="//unpkg.com/topojson@3/dist/topojson.min.js"></script>
-        <script defer src="/d3-geomap/d3-geomap.min.js"></script>
--->
         <script defer src="js/main.js" defer type='module'></script>
 
         <!--Adding Scrollify if we want to use it
@@ -56,7 +50,7 @@
           </style>
     </head>
 
-    <body>
+    <body style="margin:5%;">
         <section class='intro'>
             <div id='header'>
                 <h1>
@@ -70,7 +64,6 @@
                     Learn more about the background to this project
                        <a href='about.html'>Here</a>.
                    </h4>
-                <br>
             </div>
         <hr>
        
@@ -189,6 +182,8 @@
                         <br><br>
                         <h4>
                         One may assume the levels of child poverty would correlate with child food insecurity. But as you look at the two maps below, you may notice that where the poverty rate is high in some states, levels of food insecurity are relatively low and vice versa. These inconsistencies in the maps draw attention to the ways that different states handle the issue of food insecurity.
+                        <br><br>
+                    Hover over a state on the left, and the corresponding state on the right will be highlighted!
                     </h4>
                 </div>
                 <div class='column column-5'>
