@@ -47,6 +47,8 @@ function Introduction(container2){
         const width=800
         const height=800
         const half=width/2
+
+        const milFormat=d3.format(",")
         
         const color = d3.scaleQuantize([1, 9], d3.schemeBlues[8])
             .domain(d3.extent(fiAvg, d=>d.avgFIrate))
@@ -68,12 +70,11 @@ function Introduction(container2){
             .append('g')
             .attr('transform', `translate(${width/16}, ${height/16})`)
 
-        let min=d3.min(fiAvg,d=>d.avgFInum)
-        let max=d3.max(compare,d=>d.total)
+        
         
         const circleScale=d3.scaleLinear()
-            .domain([min,max])
-            .range([20,200])
+            .domain(d3.extent(compare, d=>d.total))
+            .range([100,200])
 
         const stateScale=d3.scaleLinear()
             .domain(d3.extent(fiAvg, d=>d.avgFInum))
@@ -197,10 +198,10 @@ function Introduction(container2){
                 .style('top', pos[1] +'px')
                 .html(function(d){
                     if (nodes.state){
-                        return '<b>State: '+nodes.name +'<br>'+'Number of Food Insecure Individuals: '+nodes.avgFInum+'<b>'
+                        return '<b>State: '+nodes.name +'<br>'+'Number of Food Insecure Individuals: '+milFormat(nodes.avgFInum)+'<b>'
                     }
                    if (nodes.total) {
-                       return '<b>Comparison: '+nodes.title +'<br>'+'Total: '+nodes.total+'<b>'
+                       return '<b>Comparison: '+nodes.title +'<br>'+'Total: '+milFormat(nodes.total)+'<b>'
                    }
                 }
                     )
@@ -246,7 +247,7 @@ function Introduction(container2){
             //update(fiAvg)
             
             compForce.on("tick", function(){
-                nodes   
+                nodes.transition().duration(100)   
                     .attr("cx", -400)
                     .attr("cy", 0)      
             })
@@ -258,7 +259,7 @@ function Introduction(container2){
 
             stateForce.alphaTarget(0.01).restart()
             stateForce.on("tick", function(){
-                nodeElements   
+                nodeElements.transition().duration(100)   
                     .attr("cx", node=>node.x)
                     .attr("cy", node=>node.y) 
                     
@@ -270,7 +271,7 @@ function Introduction(container2){
         d3.select('#compare').on('click', function(){
         
             stateForce.on("tick", function(){
-                nodeElements.transition(100).duration(1000) 
+                nodeElements.transition().duration(100) 
                     .attr("cx", -400)
                     .attr("cy", 0)      
             })
@@ -284,7 +285,7 @@ function Introduction(container2){
             compForce.alphaTarget(0.1).restart()
             
             compForce.on("tick", function(){
-                nodes   
+                nodes.transition().duration(100)   
                     .attr("cx", node=>node.x)
                     .attr("cy", node=>node.y) 
                     
