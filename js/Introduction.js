@@ -31,7 +31,7 @@ function Introduction(container2){
 
     
 
-    Promise.all([ // load multiple files
+    Promise.all([ 
         
         
         d3.csv('data/MMG_Avg.csv',d3.autoType), 
@@ -83,7 +83,10 @@ function Introduction(container2){
         const stateForce = d3.forceSimulation(fiAvg)
             .force('charge', d3.forceManyBody().strength(-20))
             .force('center', d3.forceCenter().x(half).y(half))
-        
+    
+        //SHOULD I ADD NAME TAGS TO EACH STATE?
+
+
         const nodeElements=svg2.selectAll('circle1')
             .data(fiAvg)
             .enter().append('circle')
@@ -236,7 +239,7 @@ function Introduction(container2){
             subtitle.transition().duration(2000)
                 .text("Drag each state to compare to one another")
 
-            stateForce.alphaTarget(0.01).restart()
+            stateForce.alphaTarget(0.001).restart()
             stateForce.on("tick", function(){
                 nodeElements.transition().duration(dur)   
                     .attr("cx", node=>node.x)
