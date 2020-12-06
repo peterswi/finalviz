@@ -129,7 +129,7 @@ function Introduction(container2){
                 .style('stroke','white')
                 .style('opacity','0.7')
                 .call(drag(compForce))
-        
+        console.log(compare)
         compForce.on("tick", function(){
             nodes    
                 .attr("cx", function(d, i) { 
@@ -149,7 +149,7 @@ function Introduction(container2){
                         d.y=150
                         return d.y
                     }
-                    else if(d.compare=='lifeMeals'){
+                    else if(d.compare=='NEPop'){
                         d.y=450
                         return d.y
                     }
