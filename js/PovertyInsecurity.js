@@ -133,12 +133,13 @@ Promise.all([ // load multiple files
             let stateHover = svg.selectAll('path')
               .on("mouseenter", (event, nodes) => {
                   let d = data
-                  d3.select(event.currentTarget).style("stroke", "#000000")//.style("stroke", "#fff")//.style('fill-opacity', 0.7) // highlight the state being hovered
+                  d3.select(event.currentTarget).style("stroke", "#fff")//.style('fill-opacity', 0.7) // highlight the state being hovered
                   svg2.selectAll("path") // here we're finding the state on the other map and highlighting it
                     .filter(function() {
                       return d3.select(this).attr("id") == nodes.properties.NAME;
                     })
                     .style('fill-opacity', 0.7)
+                    .style("stroke", "#000000")
                   // createLabel(event, nodes, d)
               })
               .on("mouseleave", (event, nodes) => {
