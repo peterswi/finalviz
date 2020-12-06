@@ -81,7 +81,7 @@ function Introduction(container2){
             .range([10,50])
 
         const stateForce = d3.forceSimulation(fiAvg)
-            .force('charge', d3.forceManyBody().strength(-19))
+            .force('charge', d3.forceManyBody().strength(-20))
             .force('center', d3.forceCenter().x(half).y(half))
         
         const nodeElements=svg2.selectAll('circle1')
@@ -107,20 +107,23 @@ function Introduction(container2){
             .force('charge', d3.forceManyBody().strength(-5))
             .force('center', d3.forceCenter().x(half).y(half))
         
-        const nodes=svg2.selectAll('circle3')
+        const nodes=svg2.selectAll('.circle3')
             .data(compare)
             .enter().append('circle')
                 .attr('class', 'circle3')
                 .attr('r', d=> circleScale(d.total))
                 .attr('fill',function(d){
                     if(d.compare=='canadaPop'){
-                        return 'red'
+                        return "red"
                     }
                     else if(d.compare=='spainPop'){
                         return 'gold'
                     }
                     else if(d.compare=='totFI'){
                         return '#0066ff'
+                    }
+                    else if(d.compare=='calPop'){
+                        return 'brown'
                     }
                     else{
                         return 'green'
@@ -129,6 +132,9 @@ function Introduction(container2){
                 .style('stroke','white')
                 .style('opacity','0.7')
                 .call(drag(compForce))
+
+
+
         console.log(compare)
         compForce.on("tick", function(){
             nodes    
@@ -138,7 +144,7 @@ function Introduction(container2){
                 })
                 .attr("cy", function(d){
                     if (d.compare=='totFI'){
-                        d.y=150
+                        d.y=450
                         return d.y
                     }
                     else if(d.compare=='canadaPop'){
@@ -210,44 +216,17 @@ function Introduction(container2){
             d3.select('.tooltip')
                 .style('display', 'none')
         })
-/*
-        function update(data){
-            console.log(data)
-            nodes.data(data)
-                .join(enter=> enter.append('circle')
-                .attr('r', d=> circleScale(d.avgFInum))
-                .attr('fill','#0066ff'))
-              
-            compForce.nodes(nodes)
-            compForce.alphaTarget(0.05).restart()
-/*
-            nodes.enter().append('circle')
-                .merge(nodes)
-                .call(function(nodes){
-                    nodes
-                    .transition()
-                    .duration(1000)
-                        .attr('r', d=> circleScale(d.avgFInum))
-                })
-                .attr('fill','#0066ff')
-            
-            nodes.exit()
-                .tranisition()
-                .duration(1000)
-                .remove()
-            
-          }
-            */
+
         
         
-                
+        let dur=65  
 
       
         d3.select('#states').on('click', function(){
             //update(fiAvg)
             
             compForce.on("tick", function(){
-                nodes.transition().duration(100)   
+                nodes.transition().duration(dur)   
                     .attr("cx", -400)
                     .attr("cy", 0)      
             })
@@ -259,21 +238,17 @@ function Introduction(container2){
 
             stateForce.alphaTarget(0.01).restart()
             stateForce.on("tick", function(){
-                nodeElements.transition().duration(100)   
+                nodeElements.transition().duration(dur)   
                     .attr("cx", node=>node.x)
-                    .attr("cy", node=>node.y) 
-                    
+                    .attr("cy", node=>node.y)        
             }) 
-            
-
-            
         })  
         d3.select('#compare').on('click', function(){
         
             stateForce.on("tick", function(){
-                nodeElements.transition().duration(100) 
-                    .attr("cx", -400)
-                    .attr("cy", 0)      
+                nodeElements.transition().duration(dur) 
+                    .attr("cx", 1000)
+                    .attr("cy", 1000)      
             })
             svg2.select('.graphTitle').transition()
                 .duration(2000)
@@ -285,107 +260,13 @@ function Introduction(container2){
             compForce.alphaTarget(0.1).restart()
             
             compForce.on("tick", function(){
-                nodes.transition().duration(100)   
+                nodes.transition().duration(dur)   
                     .attr("cx", node=>node.x)
                     .attr("cy", node=>node.y) 
                     
             }) 
             
         })
-        /*
-         
-        svg2.selectAll('circle2')
-            .data(compare)
-            .enter().append('circle')
-            .attr('class','circle2')
-            .attr('r', function(d){
-                return circleScale(d.total)} )
-            .attr('fill',function(d){
-                if(d.compare=='canadaPop'){
-                    return 'red'
-                }
-                else if(d.compare=='spainPop'){
-                    return 'gold'
-                }
-                else if(d.compare=='totFI'){
-                    return '#0066ff'
-                }
-                else{
-                    return 'green'
-                }
-            })
-            .attr('cx', function(d, i) { return i * 175+ 750; })
-            .attr('cy', function(d){
-                if (d.compare=='totFI'){
-                    return 160
-                }
-                else if(d.compare=='canadaPop'){
-                    return 460
-                }
-                else if (d.compare=='spainPop'){
-                    return 160
-                }
-                else if(d.compare=='lifeMeals'){
-                    return 460
-                }
-                else {
-                    return 160
-                }
-            })
-            .style('stroke','white')
-            
-        svg2.selectAll('text')
-            .data(compare)
-            .enter().append('text')
-            .text(function(d){
-                if (d.compare=='totFI'){
-                    return "US Food Insecure Population"
-                }
-                else if(d.compare=='canadaPop'){
-                    return 'Population of Canada'
-                }
-                else if (d.compare=='spainPop'){
-                    return 'Population of Spain'
-                }
-                else if(d.compare=='lifeMeals'){
-                    return "Count of one person's lifetime meals"
-                }
-                else {
-                    return "500 people's meals for a lifetime"
-                }
-            })
-            .attr('x',function(d, i) { return i *200 + 720 ; })
-            .attr('y', function(d){
-                if (d.compare=='totFI'){
-                    return 335
-                }
-                else if(d.compare=='canadaPop'){
-                    return 610
-                }
-                else if (d.compare=='spainPop'){
-                    return 335
-                }
-                else if(d.compare=='lifeMeals'){
-                    return 495
-                }
-                else {
-                    return 335
-                }
-            })
-            .style('font-size',25)
-            .style('text-anchor','middle')
-            .style('font-style','Bold')
-
-        svg2.append('text')
-            .attr('class','relativeTitle')
-            .attr('x',1200)
-            .attr('y',0)
-            .text("Comparisons")
-            .style('text-anchor','middle')
-            .style('font-style','Bold')
-            .attr('font-size',40)
-*/
-        
        
     })
 }
