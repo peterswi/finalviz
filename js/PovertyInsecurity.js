@@ -129,13 +129,14 @@ Promise.all([ // load multiple files
             .attr('font-size',30)
 
 
+            // this block handles the linking between two maps
             let stateHover = svg.selectAll('path')
               .on("mouseenter", (event, nodes) => {
                   let d = data
                   d3.select(event.currentTarget).style('fill-opacity', 0.7)
-                  svg2.selectAll("path")
+                  svg2.selectAll("path") // here we're finding the state on the other map and highlighting it
                     .filter(function() {
-                      return d3.select(this).attr("id") == nodes.properties.NAME; // filter by single attribute
+                      return d3.select(this).attr("id") == nodes.properties.NAME;
                     })
                     .style('fill-opacity', 0.7)
                   // createLabel(event, nodes, d)
