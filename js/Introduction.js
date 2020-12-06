@@ -44,8 +44,8 @@ function Introduction(container2){
         
         const avg=new Map(fiAvg.map(d=>[d.state,d.avgFIrate]))
 
-        const width=1000
-        const height=1000
+        const width=800
+        const height=800
         const half=width/2
         
         const color = d3.scaleQuantize([1, 9], d3.schemeBlues[8])
@@ -74,7 +74,11 @@ function Introduction(container2){
         const circleScale=d3.scaleLinear()
             .domain([min,max])
             .range([20,200])
-       
+
+        const stateScale=d3.scaleLinear()
+            .domain(d3.extent(fiAvg, d=>d.avgFInum))
+            .range([10,50])
+
         const stateForce = d3.forceSimulation(fiAvg)
             .force('charge', d3.forceManyBody().strength(-19))
             .force('center', d3.forceCenter().x(half).y(half))
@@ -83,7 +87,7 @@ function Introduction(container2){
             .data(fiAvg)
             .enter().append('circle')
                 .attr('class', 'circle1')
-                .attr('r', d=> circleScale(d.avgFInum))
+                .attr('r', d=> stateScale(d.avgFInum))
                 .attr('fill','#0066ff')
                 .style('stroke','white')
                 .style('opacity','0.7')
@@ -241,10 +245,6 @@ function Introduction(container2){
         d3.select('#states').on('click', function(){
             //update(fiAvg)
             
-            visType='states'
-            console.log('states')
-            
-            
             compForce.on("tick", function(){
                 nodes   
                     .attr("cx", -400)
@@ -268,11 +268,9 @@ function Introduction(container2){
             
         })  
         d3.select('#compare').on('click', function(){
-            
-            visType='compare'
-            console.log('compare')
+        
             stateForce.on("tick", function(){
-                nodeElements 
+                nodeElements.transition(100).duration(1000) 
                     .attr("cx", -400)
                     .attr("cy", 0)      
             })
